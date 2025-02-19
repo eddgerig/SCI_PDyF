@@ -1,12 +1,17 @@
 {
-  "name": "mi-proyecto-electron",
+  "name": "sci",
   "version": "0.0.0",
+  "main": "main.js",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "electron": "electron .",
+    "electron-start": "ng build --base-href ./ && electron .",
+    "electron-builder": "electron-builder",
+    "electron-build": "ng build && electron ."
   },
   "private": true,
   "dependencies": {
@@ -27,6 +32,8 @@
     "@angular/cli": "^18.2.12",
     "@angular/compiler-cli": "^18.2.0",
     "@types/jasmine": "~5.1.0",
+    "electron": "^34.2.0",
+    "electron-builder": "^25.1.8",
     "jasmine-core": "~5.2.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
@@ -34,5 +41,19 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.5.2"
+  },
+  "build": {
+  "appId": "Patrones de Diseño y Frameworks",
+  "productName": "Sistema de Casos de Investigación",
+  "directories": {
+    "output": "dist"
+  },
+  "files": [
+    "dist/sci/**/*",
+    "main.js"
+  ],
+  "win": {
+    "target": "nsis"
   }
+}
 }
