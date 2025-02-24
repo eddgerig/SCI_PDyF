@@ -29,6 +29,55 @@ export class UsuarioBdService {
   public eliminarUsuario(id: number) {
     (window as any).myAPI.eliminarUsuario(id); 
   }
+  /*public buscarUser(user: string) {
+    return (window as any).myAPI.buscarUser(user); 
+  }*/
+
+  public buscarUser(user: string) {
+    if (user) {
+        (window as any).myAPI.buscarUser(user);
+
+        (window as any).myAPI.ipcRenderer.on('usuario-buscado', (event: any, arg: { error: any; usuarios: any; }) => {
+            if (arg.error) {
+                console.error(arg.error);
+            } else {
+              console.log(`Usuarios encontrados:`, arg);
+                //this.usuariosBuscados = arg.usuarios;
+                /*if (this.usuariosBuscados.length === 0) {
+                    console.log(`No se encontraron usuarios con el nombre "${user}".`);
+                } else {
+                    console.log(`Usuarios encontrados:`, this.usuariosBuscados);
+                }*/
+            }
+        });
+    } else {
+        console.log('Por favor ingresa un nombre para buscar.');
+    }
+  }
+  public login(user: string, pass: string) {
+    let valid = false;
+    if (user) {
+        (window as any).myAPI.login(user, pass);
+
+        (window as any).myAPI.ipcRenderer.on('login_valid', (event: any, arg: any) => {
+            if (arg.error) {
+                console.error(arg.error);
+            } else {
+              console.log(`login_valid:`, arg);
+              
+                if (arg['rows'].length == 0) {
+                    console.log(`No se encontraron usuarios con el nombre "${user}".`);
+                } else {
+                    console.log(`Usuarios encontrados:`);
+                    valid = true;
+                }
+            }
+        });
+    } else {
+        console.log('Por favor ingresa un nombre para buscar.');
+    }
+    return valid;
+  }
   
   public actualizarUsuario(usuarioSeleccionado: any) {
     if (usuarioSeleccionado) {

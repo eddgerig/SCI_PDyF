@@ -20,14 +20,14 @@ export class AppComponent {
 
   ngOnInit() {
 
-    this.usuarioBdService.insertarUsuario(
+    /*this.usuarioBdService.insertarUsuario(
       'sysadmin', 
       'admin', 
        11111111, 
       'sysadmin@gmail.com',
       'sysadmin',
       'sysadmin123.',
-      1);
+      1);*/
 
     this.usuarioBdService.consultarUsuarios((rows) => {
       this.usuarios = rows;

@@ -72,6 +72,27 @@ ipcMain.on('consultar-usuarios', (event) => {
         }
     });
 });
+// Buscar usuario por username
+ipcMain.on('buscar-user', (event, user) => {
+    db.all(`SELECT * FROM usuario WHERE usuario =  ?`, [user], (err, rows) => {
+        if (err) {
+            event.reply('usuario-buscado', { error: err.message });
+        } else {
+            console.log('usuario-buscado');
+            event.reply('usuario-buscado', { success: true, rows });
+        }
+    });
+});
+ipcMain.on('login', (event, user, pass) => {
+    db.all(`SELECT * FROM usuario WHERE usuario =  ? AND  contrasena = ?`, [user, pass], (err, rows) => {
+        if (err) {
+            event.reply('login_valid', { error: err.message });
+        } else {
+            console.log('login_valid');
+            event.reply('login_valid', { success: true, rows });
+        }
+    });
+});
 
 
 
