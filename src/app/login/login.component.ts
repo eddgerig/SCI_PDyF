@@ -29,7 +29,7 @@ export class LoginComponent {
       console.log('Form submitted:', this.loginForm.value);
       // Add your login logic here
       
-      let valid = this.usuarioBdService.login(this.loginForm.value['email'], this.loginForm.value['password'])
+     /* let valid = this.usuarioBdService.login(this.loginForm.value['email'], this.loginForm.value['password'])
       if(valid){
         console.log('Login correcto');
         // Redireccionar 
@@ -37,7 +37,16 @@ export class LoginComponent {
       else{
         console.log('Login incorrecto');
       }
-      
+      */
+      this.usuarioBdService.login(this.loginForm.value['email'], this.loginForm.value['password'])
+      .subscribe((value:boolean) => {
+        if(value){
+          console.log('Login correcto----');
+          // Redireccionar
+        }else{
+          console.log('Login incorrecto------');
+        }
+      });
     }
   }
 
