@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+import { IUser } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -6,6 +8,7 @@ import { Injectable } from '@angular/core';
 export class UsuarioBdService {
 
   usuarios: any[] = [];
+  private loginSubject = new Subject<boolean>();
   constructor() { }
 
   public insertarUsuario(nombre: string, apellido: string,ci: number, email: string,user:string, password:string, rol:number) {
@@ -54,29 +57,28 @@ export class UsuarioBdService {
         console.log('Por favor ingresa un nombre para buscar.');
     }
   }
-  public login(user: string, pass: string) {
-    let valid = false;
-    if (user) {
-        (window as any).myAPI.login(user, pass);
+  
 
-        (window as any).myAPI.ipcRenderer.on('login_valid', (event: any, arg: any) => {
-            if (arg.error) {
-                console.error(arg.error);
-            } else {
-              console.log(`login_valid:`, arg);
-              
-                if (arg['rows'].length == 0) {
-                    console.log(`No se encontraron usuarios con el nombre "${user}".`);
-                } else {
-                    console.log(`Usuarios encontrados:`);
-                    valid = true;
-                }
-            }
-        });
+  public login(user: string, pass: string): Observable<boolean> {
+    if (user) {
+      (window as any).myAPI.login(user, pass);
+
+      (window as any).myAPI.ipcRenderer.on('login_valid', (event: any, arg: any) => {
+        if (arg.error) {
+          console.error(arg.error);
+          this.loginSubject.next(false); // Emitir false en caso de error
+        } else {
+          console.log(`login_valid:`, arg);
+          const valid = IUser.iniciar_session(arg['rows'].length);
+          this.loginSubject.next(valid); // Emitir el valor válido
+        }
+      });
     } else {
-        console.log('Por favor ingresa un nombre para buscar.');
+      console.log('Por favor ingresa un nombre para buscar.');
+      this.loginSubject.next(false); // Emitir false si no hay usuario
     }
-    return valid;
+    
+    return this.loginSubject.asObservable(); // Devolver el observable
   }
   
   public actualizarUsuario(usuarioSeleccionado: any) {

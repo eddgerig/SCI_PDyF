@@ -20,7 +20,7 @@ export class IUser{
         this.rol = 0;
     }
 
-    private iniciar_session(value: number){
+    static iniciar_session(value: number): boolean{
         return value == 0 ? false : true;
     }
 }
