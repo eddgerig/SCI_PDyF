@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { TableUsersComponent } from '../table-users/table-users.component';
 import { SidenavComponent } from '../side-nav/side-nav.component';
 import { SearchComponent } from '../search/search.component';
@@ -15,10 +15,15 @@ import { RouterModule } from '@angular/router';
 })
 export class UsersMainComponent {
 
+  usuarioSelected: any = null;
   searchTerm: string = ''; // Almacena el término de búsqueda
 
   showAddUser = false; // Variable de estado para controlar la visibilidad
 
+  constructor(
+    //private usuarioBdService: UsuarioBdService,
+      private cdr: ChangeDetectorRef  
+    ) {} 
   // Función para mostrar el formulario add-user
   showAddUserForm() {
     this.showAddUser = true;
@@ -27,6 +32,7 @@ export class UsersMainComponent {
   // Función para volver a la tabla
   hideAddUserForm() {
     this.showAddUser = false;
+    this.cdr.detectChanges();
   }
 
   // Función para manejar la búsqueda (si es necesario)
@@ -49,5 +55,14 @@ export class UsersMainComponent {
       Nombre de usuario: ${nuevoUsuario.username}`);
     console.log('Nuevo usuario:', nuevoUsuario);
     
+  }
+
+
+  onUserSelected($event: any){
+    console.log('Usuario seleccionado:', $event);
+    // Aquí puedes agregar la lógica para manejar el evento de selección del usuario
+    this.showAddUser = true;
+    this.usuarioSelected = $event;
+    this.cdr.detectChanges();
   }
 }

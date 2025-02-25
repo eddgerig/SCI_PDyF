@@ -18,12 +18,16 @@
           
           <!-- Mostrar la tabla solo si showAddUser es false -->
           <div *ngIf="!showAddUser">
-            <app-table-users></app-table-users>
+            <app-table-users 
+            (onSelected)="onUserSelected($event)"></app-table-users>
           </div>
           
           <!-- Mostrar el formulario add-user solo si showAddUser es true -->
-          <div *ngIf="showAddUser">
-            <app-add-user (goBack)="hideAddUserForm()"></app-add-user>
+
+          <div *ngIf="showAddUser" >
+            <app-add-user (goBack)="hideAddUserForm()"
+              [usuarioSelected]="usuarioSelected" 
+            ></app-add-user>
           </div>
 
 </div>

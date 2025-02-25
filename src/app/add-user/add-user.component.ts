@@ -1,6 +1,6 @@
 //import { Component, EventEmitter, Output } from '@angular/core';
 
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -13,9 +13,16 @@ import { FormsModule } from '@angular/forms';
 export class AddUserComponent {
   @Output() goBack = new EventEmitter<void>(); // Evento para volver atrás
   @Output() userAdded = new EventEmitter<any>(); // Evento para emitir el nuevo usuario
+  @Input() usuarioSelected: any = null;
 
+  
+  ngOnInit() {
+    console.log("AddUserComponent", this.usuarioSelected)
+  }
+  
   // Función para manejar el botón "Volver atrás"
   onGoBack() {
+    console.log("onGoBack")
     this.goBack.emit(); // Emitir el evento
   }
   user = {
