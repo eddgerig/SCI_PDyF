@@ -1,12 +1,6 @@
 <div class="case-form-container">
-    <nav class="tabs">
-      <button class="tab active">Caso</button>
-      <button class="tab">Registrar Avances</button>
-      <button class="tab">Cerrar Caso</button>
-      <button class="tab">Reabrir Caso</button>
-    </nav>
 
-    <form [formGroup]="caseForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="caseForm" (ngSubmit)="onSubmit()" *ngIf="!showRegistrarAvances">
       <div class="form-grid">
         <!-- Column 1 -->
         <div class="form-column">

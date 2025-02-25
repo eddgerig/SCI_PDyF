@@ -20,8 +20,8 @@ export class AppComponent {
   constructor(private usuarioBdService: UsuarioBdService) {} 
 
   ngOnInit() {
-
-    /*this.usuarioBdService.insertarUsuario(
+/*
+    this.usuarioBdService.insertarUsuario(
       'sysadmin', 
       'admin', 
        11111111, 
