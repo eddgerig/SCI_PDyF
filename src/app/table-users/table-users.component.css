@@ -1,0 +1,87 @@
+/* Estilos generales de la tabla */
+
+.table-container{
+    width: 800px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10PX;
+    height: 500px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Estilos para las celdas de la cabecera */
+  th {
+    background-color: #031C30; /* Color de fondo verde */
+    color: white; /* Texto en blanco */
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+  }
+  
+  /* Estilos para las celdas del cuerpo */
+  td {
+    padding: 15px 15px;
+    border-bottom: 1px solid #ddd;
+    color: #333; /* Color de texto oscuro */
+  }
+  
+  /* Estilos para las filas alternas */
+  tr:nth-child(even) {
+    background-color: #D4ECFF; /* Fondo gris claro para filas pares */
+  }
+  
+  
+  
+  /* Efecto hover para las filas */
+  tr:hover {
+    background-color: #98c8f0; /* Fondo gris claro al pasar el mouse */
+  }
+  
+  /* Estilos para la última columna (Acciones) */
+  td:last-child {
+    text-align: center;
+  }
+  
+  /* Estilos para la última fila (sin borde inferior) */
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  .edit{
+    background-color: transparent;
+    border-style: none;
+    cursor: pointer;
+  }
+  .pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    
+  }
+  
+  .pagination button {
+    padding: 5px 10px;
+    background-color: #031C30;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .pagination span {
+    font-size: 16px;
+  }

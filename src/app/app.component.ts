@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { UsersMainComponent } from './users-main/users-main.component';
 import { SidenavComponent } from './side-nav/side-nav.component';
 import { UsuarioBdService } from './service/usuario-bd.service';
 
