@@ -1,0 +1,126 @@
+<div class="case-form-container">
+    <nav class="tabs">
+      <button class="tab active">Caso</button>
+      <button class="tab">Registrar Avances</button>
+      <button class="tab">Cerrar Caso</button>
+      <button class="tab">Reabrir Caso</button>
+    </nav>
+
+    <form [formGroup]="caseForm" (ngSubmit)="onSubmit()">
+      <div class="form-grid">
+        <!-- Column 1 -->
+        <div class="form-column">
+          <div class="form-group">
+            <label for="caseNumber">Nro de caso</label>
+            <input id="caseNumber" type="text" formControlName="caseNumber">
+          </div>
+
+          <div class="form-group">
+            <label for="affectedMobile">Movil Afectado</label>
+            <input id="affectedMobile" type="text" formControlName="affectedMobile">
+          </div>
+
+          <div class="form-group">
+            <label for="irregularitySubtype">Subtipo de Irregularidad</label>
+            <select id="irregularitySubtype" formControlName="irregularitySubtype">
+              <option value="">Seleccionar</option>
+              <!-- Add options here -->
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="duration">Duración (Días)</label>
+            <input id="duration" type="number" formControlName="duration">
+          </div>
+
+          <div class="form-group">
+            <label for="detection">Detección / Procedencia del Caso</label>
+            <input id="detection" type="text" formControlName="detection">
+          </div>
+
+          <div class="form-group">
+            <label for="conclusions">Conclusiones / Recomendaciones</label>
+            <input id="conclusions" type="text" formControlName="conclusions">
+          </div>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="form-column">
+          <div class="form-group">
+            <label for="startDate">Fecha Inicio</label>
+            <input id="startDate" type="date" formControlName="startDate">
+          </div>
+
+          <div class="form-group">
+            <label for="caseType">Tipo de Caso</label>
+            <input id="caseType" type="text" formControlName="caseType">
+          </div>
+
+          <div class="form-group">
+            <label for="objective">Objetivo / Agraviado</label>
+            <input id="objective" type="text" formControlName="objective">
+          </div>
+
+          <div class="form-group">
+            <label for="description">Descripción Modus Operandi</label>
+            <input id="description" type="text" formControlName="description">
+           
+          </div>
+
+          <div class="form-group">
+            <label for="diagnostic">Diagnostico</label>
+            <input id="diagnostic" type="text" formControlName="diagnostic">
+          </div>
+
+          <div class="form-group">
+            <label for="observations">Observaciones</label>
+            <input id="observations" type="text" formControlName="observations">
+          </div>
+        </div>
+
+        <!-- Column 3 -->
+        <div class="form-column">
+          <div class="form-group">
+            <label for="investigator">Investigador</label>
+            <select id="investigator" formControlName="investigator">
+              <option value="">Seleccionar</option>
+              <!-- Add options here -->
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="irregularityType">Tipo de Irregularidad</label>
+            <select id="irregularityType" formControlName="irregularityType">
+              <option value="">Seleccionar</option>
+              <!-- Add options here -->
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="incidence">Incidencia</label>
+            <input id="incidence" type="text" formControlName="incidence">
+          </div>
+
+          <div class="form-group">
+            <label for="supportArea">Área Apoyo a Resolver</label>
+            <input id="supportArea" type="text" formControlName="supportArea">
+          </div>
+
+          <div class="form-group">
+            <label for="actions">Acciones Realizadas</label>
+            <input id="actions" type="text" formControlName="actions">
+          </div>
+
+          <div class="form-group">
+            <label for="support">Soporte</label>
+            <input id="support" type="text" formControlName="support">
+          </div>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button type="submit" class="btn-primary">Guardar</button>
+        <button type="button" class="btn-secondary" (click)="onCancel()">Cancelar</button>
+      </div>
+    </form>
+  </div>
