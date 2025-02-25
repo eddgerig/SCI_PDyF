@@ -4,3 +4,219 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
 background-color: #F1EFEF; }
+
+
+
+/* Estilos generales de la tabla */
+
+.table-container{
+    width: 800px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10PX;
+    height: 500px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Estilos para las celdas de la cabecera */
+  th {
+    background-color: #031C30; /* Color de fondo verde */
+    color: white; /* Texto en blanco */
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+  }
+  
+  /* Estilos para las celdas del cuerpo */
+  td {
+    padding: 15px 15px;
+    border-bottom: 1px solid #ddd;
+    color: #333; /* Color de texto oscuro */
+  }
+  
+  /* Estilos para las filas alternas */
+  tr:nth-child(even) {
+    background-color: #D4ECFF; /* Fondo gris claro para filas pares */
+  }
+  
+  
+  
+  /* Efecto hover para las filas */
+  tr:hover {
+    background-color: #98c8f0; /* Fondo gris claro al pasar el mouse */
+  }
+  
+  /* Estilos para la última columna (Acciones) */
+  td:last-child {
+    text-align: center;
+  }
+  
+  /* Estilos para la última fila (sin borde inferior) */
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  .edit{
+    background-color: transparent;
+    border-style: none;
+    cursor: pointer;
+  }
+  .pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    
+  }
+  
+  .pagination button {
+    padding: 5px 10px;
+    background-color: #031C30;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .pagination span {
+    font-size: 16px;
+  }
+
+
+
+
+  .user-main-container, .case-main-container{
+    display: flex;
+    flex-direction: row;
+    
+}
+.user-main-content, .case-main-content{
+margin-left: 40px;
+margin-top: 20px;
+}
+
+.buscar{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.add-user, .add-case{
+    background-color: #031C30;
+    color: #fff;
+    padding: 12px;
+    height: 40px;
+    border-radius: 10px;
+    border-style: none;
+    width: 150px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.case-form-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.tab {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #666;
+}
+
+.tab.active {
+  color: #1a365d;
+  border-bottom: 2px solid #1a365d;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  color: #4a5568;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.btn-primary {
+  background-color: #1a365d;
+  color: white;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  background-color: white;
+  color: #1a365d;
+  padding: 0.75rem 2rem;
+  border: 1px solid #1a365d;
+  border-radius: 0.375rem;
+  cursor: pointer;
+}
