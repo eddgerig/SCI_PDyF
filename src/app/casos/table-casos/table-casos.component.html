@@ -20,7 +20,11 @@
             <td>{{ cs.estado }}</td>
             <td>{{ cs.investigador }}</td>
             <td>xxxxxxxxxxxx</td>
-            <td><button class="edit" (click)="editarCaso(cs)">✏️</button></td>
+            <td>
+              <button class="edit" (click)="editarCaso(cs)">✏️</button>
+              <button class="alarma" (click)="editarCaso(cs)">⏰</button>
+            </td>
+            
             
           </tr>
         </tbody>
