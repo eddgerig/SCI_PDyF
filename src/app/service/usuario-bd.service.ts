@@ -57,6 +57,32 @@ export class UsuarioBdService {
         console.log('Por favor ingresa un nombre para buscar.');
     }
   }
+
+  // Obtener el rol del usuario:
+
+  public obtenerRolUsuario(user: string, callback: (rol: number | null) => void) {
+    if (user) {
+        (window as any).myAPI.obtenerRol(user);
+
+        (window as any).myAPI.ipcRenderer.once('rol-obtenido', (event: any, arg: { error: any; rol: number; }) => {
+            if (arg.error) {
+                console.error(arg.error);
+                callback(null);
+            } else {
+                console.log(`Rol del usuario ${user}: ${arg.rol}`);
+                callback(arg.rol);
+            }
+        });
+    } else {
+        console.log('Por favor ingresa un usuario para obtener su rol.');
+        callback(null);
+    }
+}
+
+
+
+
+
   
 
   public login(user: string, pass: string): Observable<boolean> {

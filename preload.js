@@ -7,11 +7,12 @@ contextBridge.exposeInMainWorld('myAPI', {
     eliminarUsuario: (id) => ipcRenderer.send('eliminar-usuario', id),
     buscarUser: (user) => ipcRenderer.send('buscar-user', user),
     login: (user, pass) => ipcRenderer.send('login', user, pass ),
-
+    obtenerRol:(user)=> ipcRenderer.send('obtener-rol', user ),
     actualizarUsuario: (id, nombre, email) => ipcRenderer.send('actualizar-usuario', { id, nombre, email }),
     ipcRenderer: {
         send: (channel, data) => ipcRenderer.send(channel, data),
         on: (channel, func) => ipcRenderer.on(channel, func),
+        once: (channel, func) => ipcRenderer.once(channel, func), 
     },
 
 

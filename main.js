@@ -105,6 +105,23 @@ ipcMain.on('buscar-user', (event, user) => {
         }
     });
 });
+
+//Rol del usuario:
+ipcMain.on('obtener-rol', (event, user) => {
+    db.get(`SELECT rol FROM usuario WHERE usuario = ?`, [user], (err, row) => {
+        if (err) {
+            console.error(err.message);
+            event.reply('rol-obtenido', { error: err.message });
+        } else {
+            event.reply('rol-obtenido', { error: null, rol: row ? row.rol : null });
+        }
+    });
+});
+
+
+
+
+
 ipcMain.on('login', (event, user, pass) => {
     db.all(`SELECT * FROM usuario WHERE usuario =  ? AND  contrasena = ?`, [user, pass], (err, rows) => {
         if (err) {

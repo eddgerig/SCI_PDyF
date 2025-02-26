@@ -44,8 +44,26 @@ export class LoginComponent {
       .subscribe((value:boolean) => {
         if(value){
           console.log('Login correcto----');
-          // Redireccionar
-          this.router.navigate(['/casos']);
+          this.usuarioBdService.obtenerRolUsuario(this.loginForm.value['email'], (rol) => {
+            if (rol !== null) {
+                console.log(`Rol obtenido: ${rol}`);
+                if (rol === 1) {
+                    console.log('El usuario tiene rol de administrador.');
+                      // Redireccionar
+                     this.router.navigate(['/usuarios']);
+                } else {
+                    console.log('El usuario tiene otro rol.');
+                      // Redireccionar
+                    this.router.navigate(['/casos']);
+                }
+            } else {
+                console.log('No se pudo obtener el rol del usuario.');
+            }
+        });
+        
+
+
+        
         }else{
           console.log('Login incorrecto------');
         }
