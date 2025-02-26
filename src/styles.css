@@ -104,7 +104,18 @@ table {
     
 }
 
+.reporte-main-header .buscar{
+  margin-top: 60px;
+ 
+ 
+ 
+}
 
+
+.reporte-main-header .buscar button{
+  
+  margin-top: -10px;
+}
 .user-main-content, .case-main-content{
 margin-left: 40px;
 margin-top: 20px;
@@ -216,7 +227,9 @@ margin-top: 20px;
   gap: 2rem;
   margin-top: -30px;
 }
-
+.form-column-one{
+  width: 180px;
+}
 .form-group {
   margin-bottom: 1rem;
 }
