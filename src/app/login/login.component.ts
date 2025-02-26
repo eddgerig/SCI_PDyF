@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UsuarioBdService } from '../service/usuario-bd.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginComponent {
   showPassword: boolean = false;
 
   constructor(private fb: FormBuilder,
-              private usuarioBdService: UsuarioBdService
+              private usuarioBdService: UsuarioBdService,
+              private router: Router
   ) {
     this.loginForm = this.fb.group({
       //email: ['', [Validators.required, Validators.email]],//realmente deberia ser el user que se coloque
@@ -43,6 +45,7 @@ export class LoginComponent {
         if(value){
           console.log('Login correcto----');
           // Redireccionar
+          this.router.navigate(['/casos']);
         }else{
           console.log('Login incorrecto------');
         }

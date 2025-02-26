@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidenav',
@@ -10,8 +10,10 @@ import { RouterModule } from '@angular/router';
     styleUrl: './side-nav.component.css'
 })
 export class SidenavComponent {
+  constructor(private router: Router) { }
   logout() {
     // Implement logout logic here
+    this.router.navigate(['/login']);
     console.log('Logging out...');
   }
 }
