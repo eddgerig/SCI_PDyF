@@ -27,11 +27,8 @@ export class TableCasosComponent {
     ngOnInit() {
       this.refresh();
 
-      const usuario = 'nombreUsuario'; 
-      this.usuarioBdService.obtenerRolUsuario(usuario, (rol) => {
-        this.rol = rol; // Guardamos el rol obtenido
-     //   console.log('Rol del usuario:', this.rol);
-    });
+      this.rol = this.usuarioBdService.getCurrentUserRole();
+      console.log("ROl DEL USUARIO TABLE CASOS:", this.rol);
     }
     
       

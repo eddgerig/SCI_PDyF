@@ -16,15 +16,13 @@ export class SidenavComponent implements OnInit {
   constructor(private router: Router, private usuarioBdService: UsuarioBdService) { }
 
   ngOnInit(): void {
-    const usuario = 'nombreUsuario'; 
-    this.usuarioBdService.obtenerRolUsuario(usuario, (rol) => {
-      this.rol = rol; // Guardamos el rol obtenido
-      console.log('Rol del usuario:', this.rol);
-    });
+    this.rol = this.usuarioBdService.getCurrentUserRole();
+    console.log("ROl DEL USUARIO SIDENAV:", this.rol);
   }
 
   logout() {
     // Implementar la lógica de cierre de sesión
+    this.usuarioBdService.logout();
     this.router.navigate(['/login']);
     console.log('Logging out...');
   }

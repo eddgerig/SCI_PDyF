@@ -18,11 +18,8 @@ export class CasosMainComponent {
   constructor(private router: Router, private usuarioBdService: UsuarioBdService) { }
 
   ngOnInit(): void {
-    const usuario = 'nombreUsuario'; 
-    this.usuarioBdService.obtenerRolUsuario(usuario, (rol) => {
-      this.rol = rol; // Guardamos el rol obtenido
-      console.log('Rol del usuario:', this.rol);
-    });
+    this.rol = this.usuarioBdService.getCurrentUserRole();
+    console.log("ROl DEL USUARIO CASOS MAIN:", this.rol);
   }
 
 }
