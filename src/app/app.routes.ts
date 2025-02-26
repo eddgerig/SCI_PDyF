@@ -7,6 +7,7 @@ import { AddCasoComponent } from './casos/add-caso/add-caso.component';
 import { EntidadesMainComponent } from './entidades/entidades-main/entidades-main.component';
 import { FormEntidadComponent } from './entidades/form-entidad/form-entidad.component';
 import { AddEntidadComponent } from './entidades/add-entidad/add-entidad.component';
+import { ArchivoMainComponent } from './archivos/archivo-main/archivo-main.component';
 
 
 
@@ -18,6 +19,7 @@ export const routes: Routes = [
     { path: 'entidades', component: EntidadesMainComponent },
     { path: 'add-entidad', component: AddEntidadComponent },
     { path: 'form-entidad', component: FormEntidadComponent },
+    { path: 'archivos', component: ArchivoMainComponent },
     { path: '', redirectTo: '/usuarios', pathMatch: 'full' },
 
 

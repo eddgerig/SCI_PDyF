@@ -5,19 +5,19 @@
     <div class="case-main-content">
     
         <div class="case-main-header">
-            <h1>Entidades</h1>
+            <h1>Archivos</h1>
     
             <div class="buscar">
                 <app-search></app-search>
                  <!-- <app-search *ngIf="!showAddUser" (searchEvent)="onSearch($event)"></app-search>-->
                <!-- <button class="add-user" (click)="showAddUserForm()" *ngIf="!showAddUser">-->
-                <button class="add-case" routerLink="/add-entidad">
-                  Registrar Entidad
+                <button class="add-case" >
+                  Registrar archivo
                 </button>
               </div>
             </div>
 
-              <app-table-entidades></app-table-entidades>
+              <app-table-archivo></app-table-archivo>
               
               <!-- Mostrar la tabla solo si showAddUser es false
               <div *ngIf="!showAddCase">
