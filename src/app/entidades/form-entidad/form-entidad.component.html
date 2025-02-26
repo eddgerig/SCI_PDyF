@@ -1,0 +1,98 @@
+<div class="entidad-form-container">
+
+    <form>
+      <div class="form-grid">
+        <!-- Column 1 -->
+        <div class="form-column">
+          <div class="form-group">
+            <label for="ID">Nro de caso</label>
+            <input id="id" type="text" formControlName="id">
+            </div>
+          
+
+          <div class="form-group">
+            <label for="procesos_corregidos">Procesos Corregidos</label>
+            <input id="procesos_corregidos" type="text" formControlName="procesos_corregidos">
+          </div>
+
+          <div class="form-group">
+            <label for="tipo_irregularidad">Tipo de Irregularidad</label>
+            <select id="tipo_irregularidad" formControlName="tipo_irregularidad">
+              <option value="">Seleccionar</option>
+              <!-- Add options here -->
+            </select>
+            </div>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="form-column">
+        <div class="form-group">
+            <label for="tipo_brecha">Tipo de Brecha</label>
+            <select id="tipo_brecha" formControlName="tipo_brecha">
+              <option value="">Seleccionar</option>
+              <!-- Add options here -->
+            </select>
+        </div>
+          <div class="form-group">
+            <label for="procesos_realizados"> Procesos Realizados</label>
+            <input id="procesos_realizados" type="text" formControlName="procesos_realizados">
+          </div>
+
+          <div class="form-group">
+            <label for="subtipo_irregularidad">Subtipo de Irregularidad</label>
+            <input id="subtipo_irregularidad" type="text" formControlName="subtipo_irregularidad">
+          </div>
+
+        </div>
+
+        <!-- Column 3 -->
+        <div class="form-column">
+          <div class="form-group">
+            <label for="tipo_proyecto">Tipo de Proyecto</label>
+            <select id="tipo_proyecto" formControlName="tipo_proyecto">
+              <option value="">Seleccionar</option>
+              <!-- Add options here -->
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="subtipo_ficha">Subtipo de Ficha</label>
+            <select id="subtipo_ficha" formControlName="subtipo_ficha">
+              <option value="">Seleccionar</option>
+              <!-- Add options here -->
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="procedencia_casos">Procedencia de casos</label>
+            <input id="procedencia_casos" type="text" formControlName="procedencia_casos">
+          </div>
+        </div>
+
+        
+      
+    </div>
+
+    <div class="form-group">
+        <label for="empresas">Empresas</label>
+        <select id="empresas" formControlName="empresas">
+          <option value="">Seleccionar</option>
+          <!-- Add options here -->
+        </select>
+        </div>
+        <div class="form-group">
+            <label for="investigadores">Investigadores</label>
+            <select id="investigadores" formControlName="investigadores">
+              <option value="">Seleccionar</option>
+              <!-- Add options here -->
+            </select>
+            </div>
+    
+      <div class="button-group">
+        <button type="submit" class="btn-primary">Guardar</button>
+        <button type="button" class="btn-secondary">Cancelar</button>
+      </div>
+    
+    </form>
+
+</div>
