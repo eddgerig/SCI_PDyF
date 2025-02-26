@@ -13,4 +13,51 @@ contextBridge.exposeInMainWorld('myAPI', {
         send: (channel, data) => ipcRenderer.send(channel, data),
         on: (channel, func) => ipcRenderer.on(channel, func),
     },
+
+
+        
+});
+
+contextBridge.exposeInMainWorld('caso_inv', {
+    insertarCaso_inv: (
+        nro_expediente,
+        fecha_inicio  ,
+        movil_afectado  ,
+        tipo_caso  ,
+        tipo_irregularidad  ,
+        subtipo_irregularidad  ,
+        objetivo  ,
+        incidencia  ,
+        modus_operandi  ,
+        area_apoyo  ,
+        deteccion  ,
+        diagnostico  ,
+        estado  ,
+        observacion  ,
+        soporte  ,
+        investigador
+    ) => ipcRenderer.send('insertar-caso_inv', 
+        nro_expediente,
+    fecha_inicio  ,
+    movil_afectado  ,
+    tipo_caso  ,
+    tipo_irregularidad  ,
+    subtipo_irregularidad  ,
+    objetivo  ,
+    incidencia  ,
+    modus_operandi  ,
+    area_apoyo  ,
+    deteccion  ,
+    diagnostico  ,
+    estado  ,
+    observacion  ,
+    soporte  ,
+    investigador
+        ),
+   
+    //gettUser: () => ipcRenderer.send('consultar-usuarios'),
+    ipcRenderer: {
+        send: (channel, data) => ipcRenderer.send(channel, data),
+        on: (channel, func) => ipcRenderer.on(channel, func),
+    },
 });

@@ -1,22 +1,50 @@
 export class Case {
-    constructor(
-      public caseNumber: string,
-      public affectedMobile: string,
-      public irregularitySubtype: string,
-      public duration: number,
-      public detection: string,
-      public conclusions: string,
-      public startDate: string,
-      public caseType: string,
-      public objective: string,
-      public description: string,
-      public diagnostic: string,
-      public observations: string,
-      public investigator: string,
-      public irregularityType: string,
-      public incidence: string,
-      public supportArea: string,
-      public actions: string,
-      public support: string
-    ) {}
+
+   id: number;
+   caseNumber: string;
+   affectedMobile: string;
+   irregularitySubtype: string;
+   duration: number;
+   detection: string;
+   conclusions: string;
+   startDate: string;
+   caseType: string;
+   objective: string;
+   description: string;
+   diagnostic: string;
+   observations: string;
+   investigator: number;
+   irregularityType: string;
+   incidence: string;
+   supportArea: string;
+   actions: string;
+   support: string;
+ 
+  constructor(
+  ) {
+      this.id= 0,
+      this.caseNumber= "",
+      this.affectedMobile= "",
+      this.irregularitySubtype= "",
+      this.duration= 0,
+      this.detection= "",
+      this.conclusions= "",
+      this.startDate= "",
+      this.caseType= "",
+      this.objective= "",
+      this.description= "",
+      this.diagnostic= "",
+      this.observations= "",
+      this.investigator= 0,
+      this.irregularityType= "",
+      this.incidence= "",
+      this.supportArea= "",
+      this.actions= "",
+      this.support= ""
+
+    }
+
+    static registrar_caso(value: number): boolean{
+        return value == 0? false : true;
+    }
   }

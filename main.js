@@ -19,8 +19,8 @@ app.on('ready', () => {
     mainWindow.loadFile(path.join(__dirname, 'dist/sci/browser/index.html'));
 
     // Inicializar base de datos
-    //const dbPath = path.join(__dirname, 'database.db');
-    const dbPath = path.join(app.getPath('userData'), 'database.db');
+    const dbPath = path.join(__dirname, 'database.db');
+    //const dbPath = path.join(app.getPath('userData'), 'database.db');
     db = new sqlite3.Database(dbPath, (err) => {
         if (err) {
             console.error(err.message);
@@ -45,6 +45,28 @@ app.on('window-all-closed', () => {
         usuario TEXT NOT NULL UNIQUE,
         contrasena TEXT NOT NULL,
         rol Integer NOT NULL
+    )`);
+
+    // Crear la tabla
+    db.run(`CREATE TABLE IF NOT EXISTS caso_investigador (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nro_expediente TEXT,
+        fecha_inicio TEXT ,
+        movil_afectado TEXT ,
+        tipo_caso TEXT ,
+        tipo_irregularidad TEXT ,
+        subtipo_irregularidad TEXT ,
+        objetivo TEXT ,
+        incidencia TEXT ,
+        modus_operandi TEXT ,
+        area_apoyo TEXT ,
+        deteccion TEXT ,
+        diagnostico TEXT ,
+        estado TEXT ,
+        observacion TEXT ,
+        soporte TEXT ,
+        investigador INTEGER,
+        FOREIGN KEY (investigador) REFERENCES usuario(id)
     )`);
     
 });
@@ -112,6 +134,92 @@ ipcMain.on('actualizar-usuario', (event, { id, nombre, email }) => {
             event.reply('usuario-actualizado', { error: err.message });
         } else {
             event.reply('usuario-actualizado', { success: true, id, nombre, email });
+        }
+    });
+});
+
+
+
+
+
+// Manejar la inserción de C.I
+ipcMain.on('insertar-caso_inv', (event,
+    nro_expediente,
+    fecha_inicio  ,
+    movil_afectado  ,
+    tipo_caso  ,
+    tipo_irregularidad  ,
+    subtipo_irregularidad  ,
+    objetivo  ,
+    incidencia  ,
+    modus_operandi  ,
+    area_apoyo  ,
+    deteccion  ,
+    diagnostico  ,
+    estado  ,
+    observacion  ,
+    soporte  ,
+    investigador ) => {
+
+    console.log('insertar-caso_inv')
+
+    db.run(`INSERT INTO caso_investigador (
+    nro_expediente,
+    fecha_inicio  ,
+    movil_afectado  ,
+    tipo_caso  ,
+    tipo_irregularidad  ,
+    subtipo_irregularidad  ,
+    objetivo  ,
+    incidencia  ,
+    modus_operandi  ,
+    area_apoyo  ,
+    deteccion  ,
+    diagnostico  ,
+    estado  ,
+    observacion  ,
+    soporte  ,
+    investigador) VALUES (?, ?, ?, ?,?, ?,?,?, ?, ?, ?,?, ?,?,?,?)`, [
+        nro_expediente,
+        fecha_inicio  ,
+        movil_afectado  ,
+        tipo_caso  ,
+        tipo_irregularidad  ,
+        subtipo_irregularidad  ,
+        objetivo  ,
+        incidencia  ,
+        modus_operandi  ,
+        area_apoyo  ,
+        deteccion  ,
+        diagnostico  ,
+        estado  ,
+        observacion  ,
+        soporte  ,
+        investigador], function(err) {
+        if (err) {
+            event.reply('caso_inv-insertado', { error: err.message });
+        } else {
+            event.reply('caso_inv-insertado', { id: this.lastID });
+        }
+    });
+});
+
+// Manejar la consulta de C.I
+ipcMain.on('consultar-caso_inv', (event) => {
+    db.all(`SELECT 
+                ci.*,           -- Selecciona todos los campos de caso_investigador
+                u.nombre,       -- Selecciona el nombre del investigador
+                u.correo         -- Selecciona el email del investigador
+            FROM 
+                caso_investigador ci
+            JOIN 
+                usuario u ON ci.investigador = u.id`, 
+    [], (err, rows) => {
+        if (err) {
+            event.reply('caso_inv-consultados', { error: err.message });
+        } else {
+            console.log('caso_inv-consultados', rows);
+            event.reply('caso_inv-consultados', { data: rows });
         }
     });
 });
