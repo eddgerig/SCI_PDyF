@@ -48,7 +48,7 @@ export class FormCaseComponent {
 
   onSubmit() {
     if (this.caseForm.valid) {
-      const caseData = new Case(
+     /* const caseData = new Case(
         this.caseForm.value.caseNumber,
         this.caseForm.value.affectedMobile,
         this.caseForm.value.irregularitySubtype,
@@ -67,9 +67,9 @@ export class FormCaseComponent {
         this.caseForm.value.supportArea,
         this.caseForm.value.actions,
         this.caseForm.value.support
-      );
+      );*/
 
-      this.caseService.saveCase(caseData);
+      //this.caseService.saveCase(caseData);
     }
   }
 
