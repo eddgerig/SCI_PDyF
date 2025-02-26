@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, Component, EventEmitter, Output } from '@angular/core';
 import { CaseService } from '../../service/case.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { UsuarioBdService } from '../../service/usuario-bd.service';
 
 @Component({
   selector: 'app-table-casos',
@@ -10,18 +12,32 @@ import { CommonModule } from '@angular/common';
   styleUrl: './table-casos.component.css'
 })
 export class TableCasosComponent {
-
+  rol: number | null = null;
   caso: any = []
   casoelected: any = null;
   @Output() onSelected: EventEmitter<any> = new EventEmitter<any>();
   
   constructor(private caseService: CaseService,
-      private cdr: ChangeDetectorRef  
+      private cdr: ChangeDetectorRef,
+      private router: Router, 
+      private usuarioBdService: UsuarioBdService
+      
     ) {} 
   
     ngOnInit() {
       this.refresh();
+
+      const usuario = 'nombreUsuario'; 
+      this.usuarioBdService.obtenerRolUsuario(usuario, (rol) => {
+        this.rol = rol; // Guardamos el rol obtenido
+     //   console.log('Rol del usuario:', this.rol);
+    });
     }
+    
+      
+      
+        
+      
   
   refresh(){
 

@@ -11,12 +11,12 @@ import { UsuarioBdService } from '../service/usuario-bd.service';
   styleUrls: ['./side-nav.component.css']
 })
 export class SidenavComponent implements OnInit {
-  rol: number | null = null; // Almacenaremos el rol del usuario aquí
+  rol: number | null = null; // Almacenaremos el rol del usuario 
 
   constructor(private router: Router, private usuarioBdService: UsuarioBdService) { }
 
   ngOnInit(): void {
-    const usuario = 'nombreUsuario'; // Aquí puedes obtener el nombre de usuario de donde lo necesites, como del almacenamiento local, sesión, etc.
+    const usuario = 'nombreUsuario'; 
     this.usuarioBdService.obtenerRolUsuario(usuario, (rol) => {
       this.rol = rol; // Guardamos el rol obtenido
       console.log('Rol del usuario:', this.rol);

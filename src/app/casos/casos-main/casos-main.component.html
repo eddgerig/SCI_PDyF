@@ -14,8 +14,11 @@
                 <app-search></app-search>
                  <!-- <app-search *ngIf="!showAddUser" (searchEvent)="onSearch($event)"></app-search>-->
                <!-- <button class="add-user" (click)="showAddUserForm()" *ngIf="!showAddUser">-->
-                <button class="add-case" routerLink="/casos/addcaso">
+                <button class="add-case" routerLink="/casos/addcaso" *ngIf="rol === 1">
                   Registrar Caso
+                </button>
+                <button class="add-case" *ngIf="rol !== 1">
+                  Buscar
                 </button>
               </div>
 

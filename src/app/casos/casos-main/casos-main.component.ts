@@ -2,14 +2,27 @@ import { Component } from '@angular/core';
 import { SidenavComponent } from '../../side-nav/side-nav.component';
 import { TableCasosComponent } from '../table-casos/table-casos.component';
 import { SearchComponent } from '../../search/search.component';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { UsuarioBdService } from '../../service/usuario-bd.service';
+import { NgIf } from '@angular/common';
 @Component({
   selector: 'app-casos-main',
   standalone: true,
-  imports: [SidenavComponent, TableCasosComponent, SearchComponent, RouterModule],
+  imports: [SidenavComponent, TableCasosComponent, SearchComponent, RouterModule, NgIf],
   templateUrl: './casos-main.component.html',
   styleUrl: './casos-main.component.css'
 })
 export class CasosMainComponent {
+  rol: number | null = null; // Almacenaremos el rol del usuario 
+
+  constructor(private router: Router, private usuarioBdService: UsuarioBdService) { }
+
+  ngOnInit(): void {
+    const usuario = 'nombreUsuario'; 
+    this.usuarioBdService.obtenerRolUsuario(usuario, (rol) => {
+      this.rol = rol; // Guardamos el rol obtenido
+      console.log('Rol del usuario:', this.rol);
+    });
+  }
 
 }

@@ -3,10 +3,12 @@
         <thead>
           <tr>
             <th>ID</th>
+            <th *ngIf="rol !== 1">Nro Caso</th>
             <th>Caso</th>
             <th>Estado</th>
-            <th>Investigador</th>
-            <th>Cedula</th>
+            <th *ngIf="rol !== 1">Fecha Inicio</th>
+            <th *ngIf="rol === 1">Investigador</th>
+            <th *ngIf="rol === 1">Cedula</th>
             <th>Acciones</th>
           </tr>
         </thead>
