@@ -16,8 +16,11 @@ export class AddUserComponent {
   @Output() userAdded = new EventEmitter<any>(); // Evento para emitir el nuevo usuario
   @Input()usuarioSelected: IUser = new IUser;
  // valForm!: FormGroup;
-
   
+ get rolTexto(): string {
+  return this.usuarioSelected.rol === 1 ? 'Administrador' : 'Investigador';
+} 
+
   constructor(private fb: FormBuilder){/*this.loadForm();*/}
   ngOnInit() {
     console.log("AddUserComponent", this.usuarioSelected)
