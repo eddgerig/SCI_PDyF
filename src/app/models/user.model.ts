@@ -1,8 +1,8 @@
 export class IUser{
 
     id : number;
-    nombres: string;
-    apellidos: string;
+    nombre: string;
+    apellido: string;
     cedula: number;
     correo: string;
     //telefono: number;
@@ -11,13 +11,23 @@ export class IUser{
 
     constructor(){
         this.id = 0;
-        this.nombres = '';
-        this.apellidos = '';
+        this.nombre = '';
+        this.apellido = '';
         this.cedula = 0;
         this.correo = '';
         //this.telefono = 0;
         this.contrasena = '';
         this.rol = 0;
+    }
+    static fromObject(color: IUser): IUser{
+        let obj = new IUser();
+        obj.id = color.id;
+        obj.nombre = color.nombre;
+        obj.apellido = color.apellido;
+        obj.cedula = color.cedula;
+        obj.contrasena = color.contrasena;
+        obj.rol = color.rol;
+        return obj;
     }
 
     static iniciar_session(value: number): boolean{

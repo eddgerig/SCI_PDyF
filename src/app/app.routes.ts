@@ -23,7 +23,7 @@ export const routes: Routes = [
     { path: 'archivos', component: ArchivoMainComponent },
     { path: 'reportes', component: ReportesMainComponent },
 
-    { path: '', redirectTo: '/login', pathMatch: 'full' },
+    { path: '', redirectTo: '/usuarios', pathMatch: 'full' },
 
 
 

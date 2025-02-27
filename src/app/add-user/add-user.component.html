@@ -1,14 +1,14 @@
 <div class="add-user-container">
     <h2>Añadir Usuario</h2>
   
-    <form (ngSubmit)="onSubmit()">
+    <form action="#"    (ngSubmit)="onSubmit()">
       <div class="form-row">
         <div class="form-group">
           <label for="nombre">Nombre *</label>
           <input
             type="text"
             id="nombre"
-            [(ngModel)]="user.nombre"
+            [(ngModel)]="usuarioSelected.nombre"
             name="nombre"
             required
           />
@@ -19,14 +19,14 @@
           <input
             type="text"
             id="apellido"
-            [(ngModel)]="user.apellido"
+            [(ngModel)]="usuarioSelected.apellido"
             name="apellido"
             required
           />
         </div>
       </div>
   
-      <div class="form-row">
+      <!--div class="form-row">
         <div class="form-group">
           <label for="cedula">Cédula *</label>
           <input
@@ -101,6 +101,6 @@
       <div class="form-actions">
         <button type="submit" class="btn-guardar">Guardar</button>
         <button type="button" class="btn-cancelar" (click)="onGoBack()">Cancelar</button>
-      </div>
+      </div-->
     </form>
   </div>

@@ -1,7 +1,8 @@
 //import { Component, EventEmitter, Output } from '@angular/core';
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
+import { IUser } from '../models/user.model';
 
 @Component({
   selector: 'app-add-user',
@@ -13,12 +14,32 @@ import { FormsModule } from '@angular/forms';
 export class AddUserComponent {
   @Output() goBack = new EventEmitter<void>(); // Evento para volver atrás
   @Output() userAdded = new EventEmitter<any>(); // Evento para emitir el nuevo usuario
-  @Input() usuarioSelected: any = null;
+  @Input()usuarioSelected: IUser = new IUser;
+ // valForm!: FormGroup;
 
   
+  constructor(private fb: FormBuilder){/*this.loadForm();*/}
   ngOnInit() {
     console.log("AddUserComponent", this.usuarioSelected)
   }
+  
+  /*loadForm(): void {
+    this.valForm = this.fb.group({
+        id: [null, [Validators.nullValidator]],
+        apellido: [null, [Validators.required]],
+        nombre: [null, [Validators.required]],
+       
+    });
+  }
+
+  setForm(): void {
+    this.valForm.reset({
+      id: this.usuarioSelected.id || null,
+      apellido: this.usuarioSelected.apellido,
+      nombre: this.usuarioSelected.nombre,
+     
+    });
+  }*/
   
   // Función para manejar el botón "Volver atrás"
   onGoBack() {
