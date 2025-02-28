@@ -26,6 +26,7 @@ export class UsersMainComponent {
     ) {} 
   // Función para mostrar el formulario add-user
   showAddUserForm() {
+    this.usuarioSelected = null
     this.showAddUser = true;
   }
 

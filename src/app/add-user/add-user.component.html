@@ -85,6 +85,18 @@
           />
         </div>
 
+        <div class="form-group">
+          <label for="contrasena">Contraseña *</label>
+          <input
+            type="text"
+            id="contrasena"
+            
+            name="contrasena"
+            formControlName="contrasena"
+            required
+          />
+        </div>
+
 
       </div>
     </div>
@@ -163,7 +175,8 @@
       </div>
   -->
       <div class="button-group-user">
-        <button type="submit" [disabled]="valForm.invalid " class="btn-primary">Guardar</button>
+        <button type="submit" [disabled]="valForm.invalid " class="btn-primary"
+        (click)="onGoBack()">Guardar</button>
         <button type="button" class="btn-secondary" (click)="onGoBack()">Cancelar</button>
       </div>
     </form>

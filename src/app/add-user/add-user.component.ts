@@ -15,7 +15,8 @@ import { UsuarioBdService } from '../service/usuario-bd.service';
 export class AddUserComponent {
   @Output() goBack = new EventEmitter<void>(); // Evento para volver atrás
   @Output() userAdded = new EventEmitter<any>(); // Evento para emitir el nuevo usuario
-  @Input()usuarioSelected: IUser = new IUser;
+  @Input()usuarioSelected: IUser = new IUser();
+  
   valForm!: FormGroup;
   
  get rolTexto(): string {
@@ -27,6 +28,9 @@ export class AddUserComponent {
   )
   {this.loadForm();}
   ngOnInit() {
+    if(!this.usuarioSelected ){
+      this.usuarioSelected = new IUser();
+    }
     console.log("AddUserComponent", this.usuarioSelected)
     this.setForm(); // Carga los valores del usuario seleccionado en el formulario
   }
@@ -47,7 +51,7 @@ export class AddUserComponent {
 
   setForm(): void {
     this.valForm.reset({
-      id: this.usuarioSelected.id || null,
+      id: this.usuarioSelected.id ,
       apellido: this.usuarioSelected.apellido,
       nombre: this.usuarioSelected.nombre,
       cedula: this.usuarioSelected.cedula,
@@ -79,27 +83,32 @@ export class AddUserComponent {
   // Función para manejar el envío del formulario
   onSubmit() {
     console.log("********",this.valForm)
-    this.usuarioBdService.actualizarUsuario(
-      this.valForm.value['id'],
-      this.valForm.value['nombre'],
-      this.valForm.value['apellido'],
-      this.valForm.value['cedula'],
-      this.valForm.value['correo'],
-      this.valForm.value['usuario'],
-      this.valForm.value['contrasena'],
-      this.valForm.value['rol'],
-   
-    )
-   /* this.usuarioBdService.insertarUsuario(
-      this.valForm.value['nombre'],
-      this.valForm.value['apellido'],
-      this.valForm.value['cedula'],
-      this.valForm.value['correo'],
-      this.valForm.value['usuario'],
-      this.valForm.value['contrasena'],
-      this.valForm.value['rol'],
-   
-    )*/
+    if(this.valForm.value['id'] != 0){
+
+      this.usuarioBdService.actualizarUsuario(
+        this.valForm.value['id'],
+        this.valForm.value['nombre'],
+        this.valForm.value['apellido'],
+        this.valForm.value['cedula'],
+        this.valForm.value['correo'],
+        this.valForm.value['usuario'],
+        this.valForm.value['contrasena'],
+        this.valForm.value['rol'],
+     
+      )
+    }else{
+
+      this.usuarioBdService.insertarUsuario(
+        this.valForm.value['nombre'],
+        this.valForm.value['apellido'],
+        this.valForm.value['cedula'],
+        this.valForm.value['correo'],
+        this.valForm.value['usuario'],
+        this.valForm.value['contrasena'],
+        this.valForm.value['rol'],
+     
+      )
+    }
     
     /*if (this.isFormValid()) {
       this.userAdded.emit(this.user); // Emitir el nuevo usuario
