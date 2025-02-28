@@ -4,8 +4,8 @@
     <div class="case-main-content">
     
         <div class="cases-main-header">
-            <button class="back-button">atras</button>
-            <h1>Casos de Investigacion</h1>
+            <button class="back-button" (click)="onGoBack()">atrás</button>
+            <h1>Casos de Investigación</h1>
         </div>
             <app-tabs></app-tabs>
             <app-form-case [casoSelected]="casoSelected" ></app-form-case>

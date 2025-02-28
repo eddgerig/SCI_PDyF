@@ -193,7 +193,7 @@ margin-top: 20px;
 .case-form-container, .entidad-form-container {
   padding: 2rem;
   padding-top: 50px;
-  width: 800px;
+  width: 700px;
   margin: 0 auto;
   padding-bottom: 10px;
   background-color: #ffff;
@@ -291,6 +291,13 @@ textarea {
   justify-content: center;
   gap: 1rem;
   margin-top: 100px;
+  
+}
+.button-group-case {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 5px;
   
 }
 

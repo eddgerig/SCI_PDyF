@@ -7,7 +7,7 @@ let db;
 app.on('ready', () => {
     const mainWindow = new BrowserWindow({
         width: 1200,
-        height: 800,
+        height: 900,
         icon: path.join(__dirname, 'icon.png'),
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),

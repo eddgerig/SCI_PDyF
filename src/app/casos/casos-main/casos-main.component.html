@@ -7,10 +7,10 @@
     <app-sidenav></app-sidenav>
     <div class="case-main-content">
     
-        <div class="case-main-header">
-            <h1>Casos de Investigacion</h1>
+        <div class="case-main-header" *ngIf="!showAddCase">
+            <h1>Casos de Investigación</h1>
     
-            <div class="buscar">
+            <div class="buscar" >
                 <app-search></app-search>
                  <!-- <app-search *ngIf="!showAddUser" (searchEvent)="onSearch($event)"></app-search>-->
                <!-- <button class="add-user" (click)="showAddUserForm()" *ngIf="!showAddUser">-->
@@ -19,6 +19,7 @@
                 </button>
                
               </div>
+            </div>
 
               
               
