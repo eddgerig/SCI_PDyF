@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { SidenavComponent } from '../../side-nav/side-nav.component';
 import { FormCaseComponent } from '../form-case/form-case.component';
 import { TabsComponent } from '../tabs/tabs.component';
+import { Case } from '../../models/case.model';
+import { FormBuilder } from '@angular/forms';
+
 
 
 @Component({
@@ -12,5 +15,11 @@ import { TabsComponent } from '../tabs/tabs.component';
   styleUrl: './add-caso.component.css'
 })
 export class AddCasoComponent {
-
+  @Output() caseAdded = new EventEmitter<any>();
+  @Input()casoSelected : Case = new Case;
+    
+      constructor(private fb: FormBuilder){/*this.loadForm();*/}
+      ngOnInit() {
+        console.log("AddCaseComponent", this.casoSelected)
+      }
 }

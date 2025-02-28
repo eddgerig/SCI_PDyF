@@ -14,7 +14,7 @@ import { UsuarioBdService } from '../../service/usuario-bd.service';
 export class TableCasosComponent {
   rol: number | null = null;
   caso: any = []
-  casoelected: any = null;
+  casoSelected: any = null;
   @Output() onSelected: EventEmitter<any> = new EventEmitter<any>();
   
   constructor(private caseService: CaseService,
@@ -30,11 +30,7 @@ export class TableCasosComponent {
       this.rol = this.usuarioBdService.getCurrentUserRole();
       console.log("ROl DEL USUARIO TABLE CASOS:", this.rol);
     }
-    
-      
-      
-        
-      
+     
   
   refresh(){
 

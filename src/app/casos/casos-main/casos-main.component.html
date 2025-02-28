@@ -14,30 +14,31 @@
                 <app-search></app-search>
                  <!-- <app-search *ngIf="!showAddUser" (searchEvent)="onSearch($event)"></app-search>-->
                <!-- <button class="add-user" (click)="showAddUserForm()" *ngIf="!showAddUser">-->
-                <button class="add-case" routerLink="/casos/addcaso" *ngIf="rol === 1">
+                <button class="add-case">
                   Registrar Caso
                 </button>
-                <button class="add-case" *ngIf="rol !== 1">
-                  Buscar
-                </button>
+               
               </div>
 
-              <app-table-casos></app-table-casos>
               
-              <!-- Mostrar la tabla solo si showAddUser es false
+              
+             
               <div *ngIf="!showAddCase">
-                <app-table-users 
-                (onSelected)="onUserSelected($event)"></app-table-users>
+                <app-table-casos (onSelected)="onCaseSelected($event) "></app-table-casos>
               </div>
-              
-               Mostrar el formulario add-case solo si showAddUser es true 
-    
               <div *ngIf="showAddCase" >
-                <app-add-Case (goBack)="hideAddUserForm()"
-                  [usuarioSelected]="usuarioSelected" 
-                ></app-add-user>
+                <app-add-caso (goBack)="hideAddCaseForm()" [casoSelected]="casoSelected"></app-add-caso>
               </div>
-            -->
+             
+                <!--
+              <div *ngIf="showAddCase" >
+                <app-form-case (goBack)="hideAddUserForm()"
+                  [usuarioSelected]="usuarioSelected" 
+                ></app-form-case>
+
+                [otroComponente]="este componente
+              </div-->
+            
     
     </div>
     

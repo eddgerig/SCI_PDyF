@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Case } from '../../models/case.model';
@@ -18,6 +18,10 @@ import { NgIf } from '@angular/common';
 export class FormCaseComponent {
   caseForm: FormGroup;
   showRegistrarAvances: boolean = false;
+  @Input()casoSelected : Case = new Case;
+
+
+      
 
   constructor(
     private fb: FormBuilder,
@@ -44,6 +48,9 @@ export class FormCaseComponent {
       actions: [''],
       support: [''],
     });
+  }
+  ngOnInit() {
+    console.log("Form Case Component", this.casoSelected)
   }
 
   onSubmit() {

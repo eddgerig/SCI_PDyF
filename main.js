@@ -18,7 +18,7 @@ app.on('ready', () => {
     });
 
     mainWindow.loadFile(path.join(__dirname, 'dist/sci/browser/index.html'));
-    mainWindow.setMenu(null);
+    // mainWindow.setMenu(null);
 
     // Inicializar base de datos
     const dbPath = path.join(__dirname, 'database.db');

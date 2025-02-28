@@ -6,7 +6,12 @@
         <div class="form-column">
           <div class="form-group">
             <label for="caseNumber">Nro de caso</label>
-            <input id="caseNumber" type="text" formControlName="caseNumber">
+            <input 
+            id="caseNumber"
+            [(ngModel)]="casoSelected.id" 
+            type="text" 
+            formControlName="caseNumber"
+            >
           </div>
 
           <div class="form-group">
