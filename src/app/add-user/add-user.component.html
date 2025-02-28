@@ -5,7 +5,7 @@
 <div class="user-form-container">
     
   
-    <form action="#"    (ngSubmit)="onSubmit()">
+    <form [formGroup]="valForm"    (ngSubmit)="onSubmit()">
 
       
         <div class="form-grid2">
@@ -15,9 +15,9 @@
           <label for="nombre">Nombre *</label>
           <input
             type="text"
-            id="nombre"
-            [(ngModel)]="usuarioSelected.nombre"
+            id="nombre"  
             name="nombre"
+            formControlName="nombre"
             required
           />
         </div>
@@ -29,8 +29,9 @@
           <input
             type="text"
             id="cedula"
-            [(ngModel)]="usuarioSelected.cedula"
+       
             name="cedula"
+            formControlName="cedula"
             required
           />
         </div>
@@ -39,8 +40,9 @@
           <input
             type="text"
             id="usuario"
-            [(ngModel)]="usuarioSelected.correo"
+            
             name="usuario"
+            formControlName="usuario"
             required
           />
         </div>
@@ -53,8 +55,9 @@
           <input
             type="text"
             id="apellido"
-            [(ngModel)]="usuarioSelected.apellido"
+            
             name="apellido"
+            formControlName="apellido"
             required
           />
         </div>
@@ -63,8 +66,9 @@
           <input
             type="text"
             id="correo"
-            [(ngModel)]="usuarioSelected.correo"
+            
             name="correo"
+            formControlName="correo"
             required
           />
         </div>
@@ -74,8 +78,9 @@
           <input
             type="text"
             id="rol"
-            [(ngModel)]="usuarioSelected.rol"
+            
             name="rol"
+            formControlName="rol"
             required
           />
         </div>
@@ -158,7 +163,7 @@
       </div>
   -->
       <div class="button-group-user">
-        <button type="submit" class="btn-primary">Guardar</button>
+        <button type="submit" [disabled]="valForm.invalid " class="btn-primary">Guardar</button>
         <button type="button" class="btn-secondary" (click)="onGoBack()">Cancelar</button>
       </div>
     </form>

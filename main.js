@@ -147,8 +147,9 @@ ipcMain.on('eliminar-usuario', (event, id) => {
     });
 });
 
-ipcMain.on('actualizar-usuario', (event, { id, nombre, email }) => {
-    db.run(`UPDATE usuario SET nombre = ?, email = ? WHERE id = ?`, [nombre, email, id], function(err) {
+ipcMain.on('actualizar-usuario', (event, { id, nombre, apellido,ci, email,user, password, rol }) => {
+    db.run(`UPDATE usuario SET nombre = ?, apellido = ?, cedula = ?, correo = ?,usuario = ?, contrasena = ?, rol = ? WHERE id = ?`, 
+        [nombre, apellido,ci, email,user, password, rol, id], function(err) {
         if (err) {
             event.reply('usuario-actualizado', { error: err.message });
         } else {

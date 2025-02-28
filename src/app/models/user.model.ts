@@ -6,6 +6,7 @@ export class IUser{
     cedula: number;
     correo: string;
     //telefono: number;
+    usuario: string;
     contrasena: string;
     rol: number;
 
@@ -16,6 +17,7 @@ export class IUser{
         this.cedula = 0;
         this.correo = '';
         //this.telefono = 0;
+        this.usuario = '';
         this.contrasena = '';
         this.rol = 0;
     }
@@ -25,6 +27,7 @@ export class IUser{
         obj.nombre = color.nombre;
         obj.apellido = color.apellido;
         obj.cedula = color.cedula;
+        obj.usuario = color.usuario;
         obj.contrasena = color.contrasena;
         obj.rol = color.rol;
         return obj;

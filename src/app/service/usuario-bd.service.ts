@@ -17,6 +17,12 @@ export class UsuarioBdService {
     console.log("insertar usuario");
     (window as any).myAPI.insertUser(nombre,apellido,ci, email,user, password, rol);
   }
+
+  public actualizarUsuario(id:number, nombre: string, apellido: string,ci: number, email: string,user:string, password:string, rol:number) {
+    // Llama a la API expuesta
+    console.log("actualizarUsuario");
+    (window as any).myAPI.actualizarUsuario(id, nombre, apellido,ci, email,user, password, rol);
+  }
   public consultarUsuarios(callback: (rows: any[]) => void) {
     (window as any).myAPI.ipcRenderer.send('consultar-usuarios');
 
