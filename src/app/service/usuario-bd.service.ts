@@ -90,10 +90,9 @@ public login(user: string, pass: string): Observable<boolean> {
         this.loginSubject.next(false);
       } else {
         console.log('login_valid:', arg);
-        const isValid = arg.rows.length > 0;
-        
+        //const isValid = arg.rows.length > 0;
+        const isValid = IUser.iniciar_session(arg.rows.length);
         if (isValid) {
-          // Almacenar el rol del usuario (ajusta 'rol' según tu estructura de datos)
           this.currentUserRole = arg.rows[0].rol; 
         }
         
@@ -120,7 +119,7 @@ public clearCurrentUserRole(): void {
 
 public logout() {
   this.clearCurrentUserRole();
-  this.loginSubject.next(false); // Notificar a los suscriptores que hubo un logout
+  this.loginSubject.next(IUser.cerrar_session()); // Notificar a los suscriptores que hubo un logout
   console.log('Usuario desconectado - Rol limpiado');
   // Agregar aquí cualquier otra lógica de limpieza necesaria
 }

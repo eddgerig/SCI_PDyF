@@ -33,4 +33,7 @@ export class IUser{
     static iniciar_session(value: number): boolean{
         return value == 0 ? false : true;
     }
+    static cerrar_session(): boolean{
+        return false;
+    }
 }
