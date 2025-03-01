@@ -16,7 +16,7 @@ export class TableEntidadesComponent implements OnInit {
   entidadSelected: any = null; // Entidad seleccionada
   @Output() onSelected: EventEmitter<any> = new EventEmitter<any>(); // Evento para emitir la entidad seleccionada
   currentPage: number = 1;
-  itemsPerPage: number = 10;
+  itemsPerPage: number = 7;
   totalPages: number = 1;
 
   constructor(
@@ -47,6 +47,7 @@ export class TableEntidadesComponent implements OnInit {
     if (this.currentPage > 1) {
       this.currentPage--;
     }
+    this.cdr.detectChanges();
   }
 
   // Método para cambiar a la página siguiente
@@ -54,6 +55,7 @@ export class TableEntidadesComponent implements OnInit {
     if (this.currentPage < this.totalPages) {
       this.currentPage++;
     }
+    this.cdr.detectChanges();
   }
 
   // Método para obtener las entidades de la página actual

@@ -361,6 +361,118 @@ ipcMain.on('actualizar-caso_inv', (event, { id, nro_expediente, fecha_inicio,mov
             event.reply('caso_inv-actualizado', { success: true, id});
         }
     });
+
+
+
+    ipcMain.on('actualizar-entidad', (event, {
+    id,
+    tipo_brecha,
+    tipo_proyecto,
+    procesos_corregidos,
+    procesos_realizados,
+    investigadores,
+    empresas,
+    subtipo_ficha,
+    tipo_irregularidad,
+    subtipo_irregularidad,
+    procedencia_casos
+}) => {
+    console.log('Actualizando entidad con ID:', id);
+    db.run(`UPDATE entidades SET
+        tipo_brecha = ?,
+        tipo_proyecto = ?,
+        procesos_corregidos = ?,
+        procesos_realizados = ?,
+        investigadores = ?,
+        empresas = ?,
+        subtipo_ficha = ?,
+        tipo_irregularidad = ?,
+        subtipo_irregularidad = ?,
+        procedencia_casos = ?
+        WHERE id = ?`,
+        [
+            tipo_brecha,
+            tipo_proyecto,
+            procesos_corregidos,
+            procesos_realizados,
+            investigadores,
+            empresas,
+            subtipo_ficha,
+            tipo_irregularidad,
+            subtipo_irregularidad,
+            procedencia_casos,
+            id
+        ], function(err) {
+            if (err) {
+                console.error('Error al actualizar entidad:', err.message);
+                event.reply('entidad-actualizada', { error: err.message });
+            } else {
+                console.log('Entidad actualizada con éxito:', this.changes);
+                event.reply('entidad-actualizada', { success: true, id });
+            }
+        }
+    );
+});
+
+
+
+
+
+
+
+
+});
+
+
+// Manejar la actualización de entidades
+ipcMain.on('actualizar-entidad', (event, {
+    id,
+    tipo_brecha,
+    tipo_proyecto,
+    procesos_corregidos,
+    procesos_realizados,
+    investigadores,
+    empresas,
+    subtipo_ficha,
+    tipo_irregularidad,
+    subtipo_irregularidad,
+    procedencia_casos
+}) => {
+    console.log('Actualizando entidad con ID:', id);
+    db.run(`UPDATE entidades SET
+        tipo_brecha = ?,
+        tipo_proyecto = ?,
+        procesos_corregidos = ?,
+        procesos_realizados = ?,
+        investigadores = ?,
+        empresas = ?,
+        subtipo_ficha = ?,
+        tipo_irregularidad = ?,
+        subtipo_irregularidad = ?,
+        procedencia_casos = ?
+        WHERE id = ?`,
+        [
+            tipo_brecha,
+            tipo_proyecto,
+            procesos_corregidos,
+            procesos_realizados,
+            investigadores,
+            empresas,
+            subtipo_ficha,
+            tipo_irregularidad,
+            subtipo_irregularidad,
+            procedencia_casos,
+            id
+        ], function(err) {
+            if (err) {
+                console.error('Error al actualizar entidad:', err.message);
+                event.reply('entidad-actualizada', { error: err.message });
+            } else {
+                console.log('Entidad actualizada con éxito:', this.changes);
+                event.reply('entidad-actualizada', { success: true, id });
+            }
+        }
+    );
 });
 
 

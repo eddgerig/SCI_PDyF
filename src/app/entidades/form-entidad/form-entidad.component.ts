@@ -64,6 +64,74 @@ constructor(
 
       });
     }
+
+
+    onSubmit() {
+      console.log("onSubmit",this.entidadForm)
+      if (this.entidadForm.valid) {
+        console.log("********",this.entidadForm)
+        if(this.entidadForm.value['id'] != 0){
+    
+          this.entidadService.actualizarEntidad(
+            this.entidadForm.value['id'],
+            this.entidadForm.value['tipo_brecha'],
+            this.entidadForm.value['tipo_proyecto'],
+            this.entidadForm.value['procesos_corregidos'],
+            this.entidadForm.value['procesos_realizados'],
+            this.entidadForm.value['investigadores'],
+            this.entidadForm.value['empresas'],
+            this.entidadForm.value['subtipo_ficha'],
+            this.entidadForm.value['tipo_irregularidad'],
+            this.entidadForm.value['subtipo_irregularidad'],
+            this.entidadForm.value['procedencia_casos']
+         
+          )
+        }else{
+    
+          this.entidadService.insertarEntidad(
+            this.entidadForm.value['tipo_brecha'],
+            this.entidadForm.value['tipo_proyecto'],
+            this.entidadForm.value['procesos_corregidos'],
+            this.entidadForm.value['procesos_realizados'],
+            this.entidadForm.value['investigadores'],
+            this.entidadForm.value['empresas'],
+            this.entidadForm.value['subtipo_ficha'],
+            this.entidadForm.value['tipo_irregularidad'],
+            this.entidadForm.value['subtipo_irregularidad'],
+            this.entidadForm.value['procedencia_casos']
+         
+          )
+        }
+        this.onGoBack();
+        this.cdr.detectChanges();
+       
+       /* const caseData = new Case(
+          this.entidadForm.value.caseNumber,
+          this.entidadForm.value.affectedMobile,
+          this.entidadForm.value.irregularitySubtype,
+          this.entidadForm.value.duration,
+          this.entidadForm.value.detection,
+          this.entidadForm.value.conclusions,
+          this.entidadForm.value.startDate,
+          this.entidadForm.value.caseType,
+          this.entidadForm.value.objective,
+          this.entidadForm.value.description,
+          this.entidadForm.value.diagnostic,
+          this.entidadForm.value.observations,
+          this.entidadForm.value.investigator,
+          this.entidadForm.value.irregularityType,
+          this.entidadForm.value.incidence,
+          this.entidadForm.value.supportArea,
+          this.entidadForm.value.actions,
+          this.entidadForm.value.support
+        );*/
+  
+        //this.caseService.saveCase(caseData);
+      }
+      this.onGoBack();
+      this.cdr.detectChanges();
+      
+    }
   
 
   onGoBack() {

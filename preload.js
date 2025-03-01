@@ -100,4 +100,31 @@ contextBridge.exposeInMainWorld('entidadesAPI', {
     consultarEntidades: () => ipcRenderer.send('consultar-entidades'),
     onEntidadesConsultadas: (callback) => ipcRenderer.on('entidades-consultadas', callback),
     onEntidadInsertada: (callback) => ipcRenderer.on('entidad-insertada', callback),
+
+    actualizarEntidad: (
+        id,
+        tipo_brecha,
+        tipo_proyecto,
+        procesos_corregidos,
+        procesos_realizados,
+        investigadores,
+        empresas,
+        subtipo_ficha,
+        tipo_irregularidad,
+        subtipo_irregularidad,
+        procedencia_casos
+    ) => ipcRenderer.send('actualizar-entidad', {
+        id,
+        tipo_brecha,
+        tipo_proyecto,
+        procesos_corregidos,
+        procesos_realizados,
+        investigadores,
+        empresas,
+        subtipo_ficha,
+        tipo_irregularidad,
+        subtipo_irregularidad,
+        procedencia_casos
+    }),
+    onEntidadActualizada: (callback) => ipcRenderer.on('entidad-actualizada', callback),
 });

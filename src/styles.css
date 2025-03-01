@@ -284,6 +284,11 @@ textarea {
   font-size: 11px;
 }
 
+.arrow{
+  font-size: 20px;
+}
+
+
 .button-group {
   display: flex;
   justify-content: center;
