@@ -70,6 +70,23 @@ app.on('window-all-closed', () => {
         investigador INTEGER,
         FOREIGN KEY (investigador) REFERENCES usuario(id)
     )`);
+
+    // Crear la tabla
+    db.run(`CREATE TABLE IF NOT EXISTS entidad (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        tipo_brecha TEXT,
+        tipo_proy TEXT ,
+        proceso_corregido TEXT ,
+        proceso_realizado TEXT ,
+        investigador TEXT ,
+        empresa TEXT ,
+        subtipo_ficha TEXT ,
+        tipo_irreg TEXT ,
+        subtipo_irreg TEXT ,
+        proced_casos TEXT ,
+        
+        FOREIGN KEY (investigador) REFERENCES usuario(id)
+    )`);
     
 });
 
