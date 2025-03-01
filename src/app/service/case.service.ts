@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Case } from '../models/case.model';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CaseService {
   private currentCase: Case | null = null;
-
+  private loginSubject = new Subject<Array<any>>();
   constructor() {}
 
   saveCase(caseData: Case) {
@@ -97,5 +98,29 @@ export class CaseService {
     // Llama a la API expuesta
     console.log("actualizarCasoInv", soporte);
     (window as any).caso_inv.actualizarCasoInv(id,nro_expediente, fecha_inicio,movil_afectado, tipo_caso,tipo_irregularidad, subtipo_irregularidad,objetivo,incidencia, modus_operandi, area_apoyo, deteccion, diagnostico,estado, observacion, soporte,investigador );
+  }
+
+
+  public buscarInv(): Observable<Array<any>> {
+  
+    console.log(`buscarInv`);
+      (window as any).caso_inv.buscarInv("");
+
+      (window as any).caso_inv.ipcRenderer.on('inv-buscado', (event: any, arg: { error: any; usuarios: any; }) => {
+          if (arg.error) {
+              console.error(arg.error);
+          } else {
+            console.log(`buscar-inv`, arg);
+            //this.usuariosBuscados = arg.usuarios;
+            /*if (this.usuariosBuscados.length === 0) {
+              console.log(`No se encontraron usuarios con el nombre "${user}".`);
+              } else {
+                console.log(`Usuarios encontrados:`, this.usuariosBuscados);
+            }*/
+           this.loginSubject.next(arg.usuarios);
+          }
+        });
+        console.log(`buscar-inv retirn`);
+    return this.loginSubject.asObservable();
   }
 }

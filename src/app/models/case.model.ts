@@ -13,7 +13,7 @@ export class Case {
    modus_operandi: string;
    diagnostico: string;
    observacion: string;
-   investigator: number;
+   investigador: number;
    tipo_irregularidad: string;
    incidencia: string;
    area_apoyo: string;
@@ -35,7 +35,7 @@ export class Case {
       this.deteccion= "",
       this.diagnostico= "",
       this.observacion= "",
-      this.investigator= 0,
+      this.investigador= 0,
       this.tipo_irregularidad= "",
       this.incidencia= "",
       this.area_apoyo= "",

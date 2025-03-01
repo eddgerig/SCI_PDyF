@@ -152,6 +152,18 @@ ipcMain.on('buscar-user', (event, user) => {
         }
     });
 });
+// Buscar usuario por username
+ipcMain.on('buscar-inv', (event, user) => {
+    console.log('inv-buscado ');
+    db.all(`SELECT * FROM usuario WHERE rol =  ?`, [0], (err, rows) => {
+        if (err) {
+            event.reply('inv-buscado', { error: err.message });
+        } else {
+            console.log('inv-buscado', rows);
+            event.reply('inv-buscado', { success: true, usuarios: rows });
+        }
+    });
+});
 
 //Rol del usuario:
 ipcMain.on('obtener-rol', (event, user) => {

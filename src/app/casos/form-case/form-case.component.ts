@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } 
 import { Case } from '../../models/case.model';
 import { CaseService } from '../../service/case.service';
 import { NgIf } from '@angular/common';
+import { UsuarioBdService } from '../../service/usuario-bd.service';
 
 
 
@@ -21,14 +22,14 @@ export class FormCaseComponent {
   @Input()casoSelected : Case = new Case();
   @Output() goBack = new EventEmitter<void>();
   caseForm!: FormGroup;
-
+  usuarios: any = []
       
 
   constructor(
     private fb: FormBuilder,
     private caseService: CaseService,
-    private cdr: ChangeDetectorRef 
-    
+    private cdr: ChangeDetectorRef,
+    private usuarioBdService: UsuarioBdService,
   
   ) {
     this.loadForm();
@@ -61,6 +62,7 @@ export class FormCaseComponent {
           this.casoSelected = new Case();
         }
     this.setForm(); 
+    this.getUser(); 
   }
 
   onGoBack() {
@@ -70,6 +72,20 @@ export class FormCaseComponent {
 
 
 
+  
+  getUser(){
+
+    console.log("refresh")
+    this.caseService.buscarInv().subscribe((value:any[]) => {
+      this.usuarios = value
+      console.log("array ", value)
+      this.cdr.detectChanges();
+    });
+    /*while(this.usuarios == []){ 
+      console.log("array vacio")
+      //this.goBack.emit(); // Emitir el evento
+    }*/
+  }
 
   loadForm(): void {
     this.caseForm = this.fb.group({
@@ -112,7 +128,7 @@ export class FormCaseComponent {
       modus_operandi: this.casoSelected.modus_operandi,
       diagnostico: this.casoSelected.diagnostico,
       observacion: this.casoSelected.observacion,
-      investigador:this.casoSelected.investigator,
+      investigador:this.casoSelected.investigador,
       tipo_irregularidad: this.casoSelected.tipo_irregularidad,
       incidencia: this.casoSelected.incidencia,
       area_apoyo: this.casoSelected.area_apoyo,
@@ -120,6 +136,8 @@ export class FormCaseComponent {
       soporte: this.casoSelected.soporte,
      
     });
+    this.cdr.detectChanges();
+    console.log("setForm",this.casoSelected.investigador)
   }
 
   onSubmit() {
