@@ -1,12 +1,14 @@
 <div class="entidad-form-container">
 
-    <form>
+    <form [formGroup]="entidadForm">
       <div class="form-grid">
         <!-- Column 1 -->
         <div class="form-column">
           <div class="form-group">
             <label for="ID">Nro de caso</label>
-            <input id="id" type="text" formControlName="id">
+            <input id="id" type="text" 
+            name="id"
+            formControlName="id">
             </div>
           
 

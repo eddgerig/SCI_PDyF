@@ -9,7 +9,7 @@
             
         </div>
             <app-tab-entidades></app-tab-entidades>
-            <app-form-entidad></app-form-entidad>
+            <app-form-entidad [entidadSelected]="entidadSelected" (goBack)="hideAddEntidadForm()"></app-form-entidad>
             
     </div>
     
