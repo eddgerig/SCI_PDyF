@@ -93,6 +93,32 @@ app.on('window-all-closed', () => {
     });
 
     
+    // Crear la tabla
+    db.run(`CREATE TABLE IF NOT EXISTS avances (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        caso_inv INTEGER,
+        fecha TEXT ,
+        actividades_realizadas TEXT ,
+        personas_involucradas TEXT ,
+        monto_exp TEXT ,
+        estado TEXT ,
+        
+        FOREIGN KEY (caso_inv) REFERENCES caso_investigador(id)
+    )`);
+    
+
+    // Crear la tabla
+    db.run(`CREATE TABLE IF NOT EXISTS cerrar_caso (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        observ TEXT ,
+        caso_inv INTEGER,
+        conclusion TEXT ,
+        recomend TEXT ,
+        estado TEXT ,
+        
+        FOREIGN KEY (caso_inv) REFERENCES caso_investigador(id)
+    )`);
+    
     
 });
 
@@ -333,6 +359,31 @@ ipcMain.on('actualizar-caso_inv', (event, { id, nro_expediente, fecha_inicio,mov
             event.reply('caso_inv-actualizado', { error: err.message });
         } else {
             event.reply('caso_inv-actualizado', { success: true, id});
+        }
+    });
+});
+
+
+// Manejar la inserción de AVANCES
+ipcMain.on('insertar-avances', (event,actividades_realizadas, personas_involucradas, monto_exp) => {
+    console.log('insertar-avances',actividades_realizadas, personas_involucradas, monto_exp)
+    db.run(`INSERT INTO avances (actividades_realizadas, personas_involucradas, monto_exp) VALUES (?, ?, ?)`, [actividades_realizadas, personas_involucradas, monto_exp], function(err) {
+        if (err) {
+            event.reply('avances-insertado', { error: err.message });
+        } else {
+            event.reply('avances-insertado', { id: this.lastID });
+        }
+    });
+});
+
+// Manejar la consulta de AVANCES
+ipcMain.on('consultar-avances', (event) => {
+    db.all(`SELECT * FROM usuario`, [], (err, rows) => {
+        if (err) {
+            event.reply('avances-consultados', { error: err.message });
+        } else {
+            console.log('avances-consultados', rows);
+            event.reply('avances-consultados', { usuarios: rows });
         }
     });
 });

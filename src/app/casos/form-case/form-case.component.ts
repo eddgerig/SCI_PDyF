@@ -5,6 +5,8 @@ import { Case } from '../../models/case.model';
 import { CaseService } from '../../service/case.service';
 import { NgIf } from '@angular/common';
 import { UsuarioBdService } from '../../service/usuario-bd.service';
+import { EntidadBdService } from '../../service/entidad-bd.service';
+import { IEntidad } from '../../models/entidad.model';
 
 
 
@@ -23,13 +25,14 @@ export class FormCaseComponent {
   @Output() goBack = new EventEmitter<void>();
   caseForm!: FormGroup;
   usuarios: any = []
-      
+  entidades: IEntidad[] = [];  
 
   constructor(
     private fb: FormBuilder,
     private caseService: CaseService,
     private cdr: ChangeDetectorRef,
     private usuarioBdService: UsuarioBdService,
+    private entidadBdService: EntidadBdService,
   
   ) {
     this.loadForm();
@@ -70,9 +73,6 @@ export class FormCaseComponent {
     this.goBack.emit(); // Emitir el evento
   }
 
-
-
-  
   getUser(){
 
     console.log("refresh")
@@ -81,12 +81,14 @@ export class FormCaseComponent {
       console.log("array ", value)
       this.cdr.detectChanges();
     });
-    /*while(this.usuarios == []){ 
-      console.log("array vacio")
-      //this.goBack.emit(); // Emitir el evento
-    }*/
   }
-
+  /*cargarEntidades() {
+      this.entidadBdService.consultarEntidades().subscribe((entidades: any[]) => {
+        this.entidades = entidades.map(entidad => IEntidad.fromObject(entidad));
+        //this.calcularTotalPaginas();
+        this.cdr.detectChanges(); // Forzar la detección de cambios
+      });
+    }*/
   loadForm(): void {
     this.caseForm = this.fb.group({
       id: [null],

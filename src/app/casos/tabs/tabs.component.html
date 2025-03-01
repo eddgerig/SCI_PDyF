@@ -1,6 +1,7 @@
 <nav class="tabs">
-    <button class="tab active" routerLink="/casos/addcaso">Caso</button>
-    <button class="tab">Registrar Avances</button>
-    <button class="tab">Cerrar Caso</button>
-    <button class="tab">Reabrir Caso</button>
+    <!--button class="tab active" (click)="changeTab(0)" routerLink="/casos/addcaso">Caso</button-->
+    <button class="tab active" (click)="changeTab(0)" >Caso</button>
+    <button class="tab" (click)="changeTab(1)">Registrar Avances</button>
+    <button class="tab" (click)="changeTab(2)">Cerrar Caso</button>
+    <button class="tab" (click)="changeTab(3)">Reabrir Caso</button>
   </nav>

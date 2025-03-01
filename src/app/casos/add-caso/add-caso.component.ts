@@ -7,13 +7,17 @@ import { FormBuilder } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CaseService } from '../../service/case.service';
+import { FormAvancesComponent } from '../form-avances/form-avances.component';
+import { FormCerrarCasoComponent } from '../../cerrar-reabrir/form-cerrar-caso/form-cerrar-caso.component';
 
 
 
 @Component({
   selector: 'app-add-caso',
   standalone: true,
-  imports: [SidenavComponent, FormCaseComponent, TabsComponent, RouterModule, CommonModule],
+  imports: [SidenavComponent, FormCaseComponent, TabsComponent, RouterModule, CommonModule,
+    FormAvancesComponent, FormCerrarCasoComponent
+  ],
   templateUrl: './add-caso.component.html',
   styleUrl: './add-caso.component.css'
 })
@@ -21,6 +25,7 @@ export class AddCasoComponent {
   @Output() caseAdded = new EventEmitter<any>();
   @Input()casoSelected : Case = new Case;
   @Output() goBack = new EventEmitter<void>();
+  activeTabId = 0
   showAddUser = false; // Variable de estado para controlar la visibilidad
 
     
@@ -40,6 +45,14 @@ export class AddCasoComponent {
       hideAddUserForm() {
         this.showAddUser = false;
         this.onGoBack();
+        this.cdr.detectChanges();
+      }
+      
+      onSelected($event: number){
+        console.log('onSelected', $event);
+        // Aquí puedes agregar la lógica para manejar el evento de selección del usuario
+        this.activeTabId = $event;
+       
         this.cdr.detectChanges();
       }
 
