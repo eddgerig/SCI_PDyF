@@ -1,6 +1,6 @@
 //import { Component, EventEmitter, Output } from '@angular/core';
 
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IUser } from '../models/user.model';
 import { UsuarioBdService } from '../service/usuario-bd.service';
@@ -25,6 +25,7 @@ export class AddUserComponent {
 
   constructor(private fb: FormBuilder,
               private usuarioBdService: UsuarioBdService,
+              private cdr: ChangeDetectorRef  
   )
   {this.loadForm();}
   ngOnInit() {
@@ -110,6 +111,7 @@ export class AddUserComponent {
       )
     }
     this.onGoBack();
+    this.cdr.detectChanges();
     
     /*if (this.isFormValid()) {
       this.userAdded.emit(this.user); // Emitir el nuevo usuario
