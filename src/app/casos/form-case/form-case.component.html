@@ -1,6 +1,8 @@
 <div class="case-form-container">
 
+  <div class="form-grid" *ngIf="usuarios != []">
     
+  </div>
   
   <form [formGroup]="caseForm"    (ngSubmit)="onSubmit()">
       <div class="form-grid">
@@ -114,8 +116,10 @@
             <label for="investigador">Investigador</label>
             <select id="investigador" formControlName="investigador"
             name="investigador"
+            [(ngModel)]="casoSelected.investigador"
             >
-              <option value="">Seleccionar</option>
+              <option >Seleccionar {{casoSelected.investigador}} </option>
+              <option *ngFor="let par of usuarios" [value]="par.id">{{ par.nombre }}</option>
               <!-- Add options here -->
             </select>
           </div>
