@@ -78,7 +78,7 @@ app.on('window-all-closed', () => {
         tipo_proy TEXT ,
         proceso_corregido TEXT ,
         proceso_realizado TEXT ,
-        investigador TEXT ,
+        investigador INTEGER ,
         empresa TEXT ,
         subtipo_ficha TEXT ,
         tipo_irreg TEXT ,
@@ -87,7 +87,35 @@ app.on('window-all-closed', () => {
         
         FOREIGN KEY (investigador) REFERENCES usuario(id)
     )`);
+
+    // Crear la tabla
+    /*db.run(`CREATE TABLE IF NOT EXISTS avances (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        caso_inv INTEGER,
+        fecha TEXT ,
+        actividades_realizadas TEXT ,
+        personas_involucradas TEXT ,
+        monto_exp TEXT ,
+        estado TEXT ,
+        
+        FOREIGN KEY (investigador) REFERENCES usuario(id)
+        FOREIGN KEY (caso_inv) REFERENCES caso_investigador(id)
+    )`);
     
+
+    // Crear la tabla
+    db.run(`CREATE TABLE IF NOT EXISTS cerrar_caso (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        observ TEXT ,
+        caso_inv INTEGER,
+        conclusion TEXT ,
+        recomend TEXT ,
+        estado TEXT ,
+        
+        FOREIGN KEY (investigador) REFERENCES usuario(id)
+        FOREIGN KEY (caso_inv) REFERENCES caso_investigador(id)
+    )`);
+    */
 });
 
 // Manejar la inserción de usuarios
@@ -257,6 +285,29 @@ ipcMain.on('consultar-caso_inv', (event) => {
         } else {
             console.log('caso_inv-consultados', rows);
             event.reply('caso_inv-consultados', { data: rows });
+        }
+    });
+});
+
+// Manejar la inserción de usuarios
+ipcMain.on('insertar-caso_inv', (event, nro_expediente, fecha_inicio,movil_afectado, tipo_caso,tipo_irregularidad, subtipo_irregularidad,objetivo,incidencia, modus_operandi, area_apoyo, deteccion, diagnostico,estado, observacion, soporte,investigador ) => {
+    console.log('insertar-caso_inv', nro_expediente, fecha_inicio,movil_afectado, tipo_caso,tipo_irregularidad, subtipo_irregularidad,objetivo,incidencia, modus_operandi, area_apoyo, deteccion, diagnostico,estado, observacion, soporte,investigador )
+    db.run(`INSERT INTO caso_investigador (nro_expediente, fecha_inicio,movil_afectado, tipo_caso,tipo_irregularidad, subtipo_irregularidad,objetivo,incidencia, modus_operandi, area_apoyo, deteccion, diagnostico,estado, observacion, soporte,investigador ) VALUES (?, ?,?, ?,?,?,?,?, ?, ?, ?,?, ?,?,?,?)`, [nombre,apellido,ci, email, user, password, rol], function(err) {
+        if (err) {
+            event.reply('caso_inv-insertado', { error: err.message });
+        } else {
+            event.reply('caso_inv-insertado', { id: this.lastID });
+        }
+    });
+});
+
+ipcMain.on('actualizar-caso_inv', (event, { id, nro_expediente, fecha_inicio,movil_afectado, tipo_caso,tipo_irregularidad, subtipo_irregularidad,objetivo,incidencia, modus_operandi, area_apoyo, deteccion, diagnostico,estado, observacion, soporte,investigador }) => {
+    db.run(`UPDATE caso_investigador SET nro_expediente = ?, fecha_inicio = ?, movil_afectado = ?, tipo_caso = ?,tipo_irregularidad = ?, subtipo_irregularidad = ?,objetivo = ?,incidencia = ?, modus_operandi = ? , area_apoyo = ? , deteccion = ? , diagnostico = ? , estado = ?, observacion = ?, soporte = ? , investigador = ?    WHERE id = ?`, 
+        [nro_expediente, fecha_inicio,movil_afectado, tipo_caso,tipo_irregularidad, subtipo_irregularidad,objetivo,incidencia, modus_operandi, area_apoyo, deteccion, diagnostico,estado, observacion, soporte,investigador , id], function(err) {
+        if (err) {
+            event.reply('caso_inv-actualizado', { error: err.message });
+        } else {
+            event.reply('caso_inv-actualizado', { success: true, id, nombre, email });
         }
     });
 });
