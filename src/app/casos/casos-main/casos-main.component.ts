@@ -24,7 +24,10 @@ export class CasosMainComponent {
     console.log("ROl DEL USUARIO CASOS MAIN:", this.rol);
   }
   showAddCaseForm() {
+    this.casoSelected = null
     this.showAddCase = true;
+    this.cdr.detectChanges();
+    console.log("click");
   }
   onCaseSelected($event: any){
     console.log('Usuario seleccionado desde case-main:', $event);

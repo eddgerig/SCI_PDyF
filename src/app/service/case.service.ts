@@ -77,4 +77,25 @@ export class CaseService {
         }
     });
   }
+  public actualizarCasoInv(id:number,
+    nro_expediente :string,
+    fecha_inicio   :string,
+    movil_afectado   :string,
+    tipo_caso   :string,
+    tipo_irregularidad   :string,
+    subtipo_irregularidad   :string,
+    objetivo   :string,
+    incidencia   :string,
+    modus_operandi   :string,
+    area_apoyo   :string,
+    deteccion   :string,
+    diagnostico   :string,
+    estado   :string,
+    observacion   :string,
+    soporte   :string,
+    investigador :number) {
+    // Llama a la API expuesta
+    console.log("actualizarCasoInv", soporte);
+    (window as any).caso_inv.actualizarCasoInv(id,nro_expediente, fecha_inicio,movil_afectado, tipo_caso,tipo_irregularidad, subtipo_irregularidad,objetivo,incidencia, modus_operandi, area_apoyo, deteccion, diagnostico,estado, observacion, soporte,investigador );
+  }
 }

@@ -59,6 +59,7 @@ contextBridge.exposeInMainWorld('caso_inv', {
     ipcRenderer: {
         send: (channel, data) => ipcRenderer.send(channel, data),
         on: (channel, func) => ipcRenderer.on(channel, func),
+        once: (channel, func) => ipcRenderer.once(channel, func), 
     },
 });
 

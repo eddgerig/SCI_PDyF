@@ -285,11 +285,11 @@ ipcMain.on('insertar-caso_inv', (event,
 ipcMain.on('consultar-caso_inv', (event) => {
     db.all(`SELECT 
                 ci.*,           -- Selecciona todos los campos de caso_investigador
-                u.nombre,       -- Selecciona el nombre del investigador
-                u.correo         -- Selecciona el email del investigador
+                u.nombre,       -- Selecciona el nombre del investigador (puede ser NULL)
+                u.correo        -- Selecciona el email del investigador (puede ser NULL)
             FROM 
                 caso_investigador ci
-            JOIN 
+            LEFT JOIN 
                 usuario u ON ci.investigador = u.id`, 
     [], (err, rows) => {
         if (err) {
@@ -297,6 +297,30 @@ ipcMain.on('consultar-caso_inv', (event) => {
         } else {
             console.log('caso_inv-consultados', rows);
             event.reply('caso_inv-consultados', { data: rows });
+        }
+    });
+});
+
+// Manejar la inserción de usuarios
+ipcMain.on('insertar-caso_inv', (event, nro_expediente, fecha_inicio,movil_afectado, tipo_caso,tipo_irregularidad, subtipo_irregularidad,objetivo,incidencia, modus_operandi, area_apoyo, deteccion, diagnostico,estado, observacion, soporte,investigador ) => {
+    console.log('insertar-caso_inv', nro_expediente, fecha_inicio,movil_afectado, tipo_caso,tipo_irregularidad, subtipo_irregularidad,objetivo,incidencia, modus_operandi, area_apoyo, deteccion, diagnostico,estado, observacion, soporte,investigador )
+    db.run(`INSERT INTO caso_investigador (nro_expediente, fecha_inicio,movil_afectado, tipo_caso,tipo_irregularidad, subtipo_irregularidad,objetivo,incidencia, modus_operandi, area_apoyo, deteccion, diagnostico,estado, observacion, soporte,investigador ) VALUES (?, ?,?, ?,?,?,?,?, ?, ?, ?,?, ?,?,?,?)`, [nro_expediente, fecha_inicio,movil_afectado, tipo_caso,tipo_irregularidad, subtipo_irregularidad,objetivo,incidencia, modus_operandi, area_apoyo, deteccion, diagnostico,estado, observacion, soporte,investigador], function(err) {
+        if (err) {
+            event.reply('caso_inv-insertado', { error: err.message });
+        } else {
+            event.reply('caso_inv-insertado', { id: this.lastID });
+        }
+    });
+});
+
+ipcMain.on('actualizar-caso_inv', (event, { id, nro_expediente, fecha_inicio,movil_afectado, tipo_caso,tipo_irregularidad, subtipo_irregularidad,objetivo,incidencia, modus_operandi, area_apoyo, deteccion, diagnostico,estado, observacion, soporte,investigador }) => {
+    //console.log('actualizar-caso_inv', nro_expediente, fecha_inicio,movil_afectado, tipo_caso,tipo_irregularidad, subtipo_irregularidad,objetivo,incidencia, modus_operandi, area_apoyo, deteccion, diagnostico,estado, observacion, soporte,investigador )
+    db.run(`UPDATE caso_investigador SET nro_expediente = ?, fecha_inicio = ?, movil_afectado = ?, tipo_caso = ?,tipo_irregularidad = ?, subtipo_irregularidad = ?,objetivo = ?,incidencia = ?, modus_operandi = ? , area_apoyo = ? , deteccion = ? , diagnostico = ? , estado = ?, observacion = ?, soporte = ? , investigador = ?    WHERE id = ?`, 
+        [nro_expediente, fecha_inicio,movil_afectado, tipo_caso,tipo_irregularidad, subtipo_irregularidad,objetivo,incidencia, modus_operandi, area_apoyo, deteccion, diagnostico,estado, observacion, soporte,investigador , id], function(err) {
+        if (err) {
+            event.reply('caso_inv-actualizado', { error: err.message });
+        } else {
+            event.reply('caso_inv-actualizado', { success: true, id});
         }
     });
 });

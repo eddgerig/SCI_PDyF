@@ -18,7 +18,7 @@ import { NgIf } from '@angular/common';
 export class FormCaseComponent {
   
   showRegistrarAvances: boolean = false;
-  @Input()casoSelected : Case = new Case;
+  @Input()casoSelected : Case = new Case();
   @Output() goBack = new EventEmitter<void>();
   caseForm!: FormGroup;
 
@@ -55,7 +55,7 @@ export class FormCaseComponent {
     });*/
   }
   ngOnInit() {
-    console.log("Form Case Component", this.casoSelected.observacion)
+    console.log("Form Case Component", this.casoSelected)
     
     if(!this.casoSelected ){
           this.casoSelected = new Case();
@@ -64,7 +64,7 @@ export class FormCaseComponent {
   }
 
   onGoBack() {
-    console.log("onGoBack")
+    console.log("onGoBack FormCaseComponent")
     this.goBack.emit(); // Emitir el evento
   }
 
@@ -73,6 +73,7 @@ export class FormCaseComponent {
 
   loadForm(): void {
     this.caseForm = this.fb.group({
+      id: [null],
       nro_expediente: [null, Validators.required],
       movil_afectado: [null, Validators.required],
       subtipo_irregularidad: [null],
@@ -85,8 +86,10 @@ export class FormCaseComponent {
       modus_operandi: [null],
       diagnostico: [null],
       observaciones: [null],
-      investigador: [null, Validators.required],
-      tipo_irregularidad: [null, Validators.required],
+      investigador: [null],
+      //investigador: [null, Validators.required],
+      tipo_irregularidad: [null],
+      //tipo_irregularidad: [null, Validators.required],
       incidencia: [null],
       area_apoyo: [null],
       estado: [null],
@@ -96,6 +99,7 @@ export class FormCaseComponent {
 
   setForm(): void {
     this.caseForm.reset({
+     id: this.casoSelected.id,
      nro_expediente: this.casoSelected.nro_expediente,
      movil_afectado:this.casoSelected.movil_afectado,
       subtipo_irregularidad: this.casoSelected.subtipo_irregularidad,
@@ -119,7 +123,56 @@ export class FormCaseComponent {
   }
 
   onSubmit() {
+    console.log("onSubmit",this.caseForm)
     if (this.caseForm.valid) {
+      console.log("********",this.caseForm)
+      if(this.caseForm.value['id'] != 0){
+  
+        this.caseService.actualizarCasoInv(
+          this.caseForm.value['id'],
+          this.caseForm.value['nro_expediente'],
+          this.caseForm.value['fecha_inicio'],
+          this.caseForm.value['movil_afectado'],
+          this.caseForm.value['tipo_caso'],
+          this.caseForm.value['tipo_irregularidad'],
+          this.caseForm.value['subtipo_irregularidad'],
+          this.caseForm.value['objetivo'],
+          this.caseForm.value['incidencia'],
+          this.caseForm.value['modus_operandi'],
+          this.caseForm.value['area_apoyo'],
+          this.caseForm.value['deteccion'],
+          this.caseForm.value['diagnostico'],
+          this.caseForm.value['estado'],
+          this.caseForm.value['observacion'],
+          this.caseForm.value['soporte'],
+          this.caseForm.value['investigador']
+       
+        )
+      }else{
+  
+        this.caseService.insertarCaso_inv(
+          this.caseForm.value['nro_expediente'],
+          this.caseForm.value['fecha_inicio'],
+          this.caseForm.value['movil_afectado'],
+          this.caseForm.value['tipo_caso'],
+          this.caseForm.value['tipo_irregularidad'],
+          this.caseForm.value['subtipo_irregularidad'],
+          this.caseForm.value['objetivo'],
+          this.caseForm.value['incidencia'],
+          this.caseForm.value['modus_operandi'],
+          this.caseForm.value['area_apoyo'],
+          this.caseForm.value['deteccion'],
+          this.caseForm.value['diagnostico'],
+          this.caseForm.value['estado'],
+          this.caseForm.value['observacion'],
+          this.caseForm.value['soporte'],
+          this.caseForm.value['investigador']
+       
+        )
+      }
+      this.onGoBack();
+      this.cdr.detectChanges();
+     
      /* const caseData = new Case(
         this.caseForm.value.caseNumber,
         this.caseForm.value.affectedMobile,
