@@ -1,7 +1,7 @@
 export class Case {
 
    id: number;
-   caseNumber: string;
+   nro_expediente: string;
    affectedMobile: string;
    irregularitySubtype: string;
    duration: number;
@@ -12,7 +12,7 @@ export class Case {
    objective: string;
    description: string;
    diagnostic: string;
-   observations: string;
+   observacion: string;
    investigator: number;
    irregularityType: string;
    incidence: string;
@@ -23,7 +23,7 @@ export class Case {
   constructor(
   ) {
       this.id= 0,
-      this.caseNumber= "",
+      this.nro_expediente= "",
       this.affectedMobile= "",
       this.irregularitySubtype= "",
       this.duration= 0,
@@ -34,7 +34,7 @@ export class Case {
       this.objective= "",
       this.description= "",
       this.diagnostic= "",
-      this.observations= "",
+      this.observacion= "",
       this.investigator= 0,
       this.irregularityType= "",
       this.incidence= "",

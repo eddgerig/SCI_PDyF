@@ -1,27 +1,39 @@
 <div class="case-form-container">
 
-    <form [formGroup]="caseForm" (ngSubmit)="onSubmit()" *ngIf="!showRegistrarAvances">
+    
+  
+  <form [formGroup]="caseForm"    (ngSubmit)="onSubmit()">
       <div class="form-grid">
         <!-- Column 1 -->
         <div class="form-column">
           <div class="form-group">
-            <label for="caseNumber">Nro de caso</label>
+            <label for="caseNumber">Nro de Expediente</label>
             <input 
+            type="text"
             id="caseNumber"
-            [(ngModel)]="casoSelected.id" 
-            type="text" 
+            name="caseNumber" 
             formControlName="caseNumber"
+            required
             >
           </div>
 
           <div class="form-group">
             <label for="affectedMobile">Movil Afectado</label>
-            <input id="affectedMobile" type="text" formControlName="affectedMobile">
+            <input 
+            id="affectedMobile" 
+            type="text" 
+            name="affectedMobile"
+            formControlName="affectedMobile"
+            required
+            >
+            
           </div>
 
           <div class="form-group">
             <label for="irregularitySubtype">Subtipo de Irregularidad</label>
-            <select id="irregularitySubtype" formControlName="irregularitySubtype">
+            <select 
+            id="irregularitySubtype" formControlName="irregularitySubtype"
+            name="irregularitySubtype">
               <option value="">Seleccionar</option>
               <!-- Add options here -->
             </select>
@@ -29,17 +41,23 @@
 
           <div class="form-group">
             <label for="duration">Duración (Días)</label>
-            <input id="duration" type="number" formControlName="duration">
+            <input id="duration" type="number" 
+            name="duration"
+            formControlName="duration">
           </div>
 
           <div class="form-group">
             <label for="detection">Detección / Procedencia del Caso</label>
-            <input id="detection" type="text" formControlName="detection">
+            <input id="detection" type="text" 
+            name="detection"
+            formControlName="detection">
           </div>
 
           <div class="form-group">
             <label for="conclusions">Conclusiones</label>
-            <input id="conclusions" type="text" formControlName="conclusions">
+            <input id="conclusions" type="text" 
+            name="conclusions"
+            formControlName="conclusions">
           </div>
         </div>
 
@@ -47,33 +65,46 @@
         <div class="form-column">
           <div class="form-group">
             <label for="startDate">Fecha Inicio</label>
-            <input id="startDate" type="date" formControlName="startDate">
+            <input id="startDate" type="text" 
+            name="startDate"
+            formControlName="startDate">
           </div>
 
           <div class="form-group">
             <label for="caseType">Tipo de Caso</label>
-            <input id="caseType" type="text" formControlName="caseType">
+            <input id="caseType" 
+            type="text" 
+            name="caseType"
+            formControlName="caseType">
           </div>
 
           <div class="form-group">
             <label for="objective">Objetivo / Agraviado</label>
-            <input id="objective" type="text" formControlName="objective">
+            <input id="objective" type="text" 
+            name="objective"
+            formControlName="objective">
           </div>
 
           <div class="form-group">
             <label for="description">Descripción Modus Operandi</label>
-            <input id="description" type="text" formControlName="description">
+            <input id="description" type="text" 
+            name="description"
+            formControlName="description">
            
           </div>
 
           <div class="form-group">
             <label for="diagnostic">Diagnostico</label>
-            <input id="diagnostic" type="text" formControlName="diagnostic">
+            <input id="diagnostic" type="text"
+            name="diagnostic"
+            formControlName="diagnostic">
           </div>
 
           <div class="form-group">
             <label for="observations">Observaciones</label>
-            <input id="observations" type="text" formControlName="observations">
+            <input id="observations" type="text" 
+            name="observations"
+            formControlName="observations">
           </div>
         </div>
 
@@ -81,7 +112,9 @@
         <div class="form-column">
           <div class="form-group">
             <label for="investigator">Investigador</label>
-            <select id="investigator" formControlName="investigator">
+            <select id="investigator" formControlName="investigator"
+            name="investigator"
+            >
               <option value="">Seleccionar</option>
               <!-- Add options here -->
             </select>
@@ -89,7 +122,9 @@
 
           <div class="form-group">
             <label for="irregularityType">Tipo de Irregularidad</label>
-            <select id="irregularityType" formControlName="irregularityType">
+            <select id="irregularityType" formControlName="irregularityType"
+            name="irregularityType"
+            >
               <option value="">Seleccionar</option>
               <!-- Add options here -->
             </select>
@@ -97,22 +132,30 @@
 
           <div class="form-group">
             <label for="incidence">Incidencia</label>
-            <input id="incidence" type="text" formControlName="incidence">
+            <input id="incidence" type="text" 
+            name="incidence"
+            formControlName="incidence">
           </div>
 
           <div class="form-group">
             <label for="supportArea">Área Apoyo a Resolver</label>
-            <input id="supportArea" type="text" formControlName="supportArea">
+            <input id="supportArea" type="text" 
+            name="supportArea"
+            formControlName="supportArea">
           </div>
 
           <div class="form-group">
             <label for="actions">Acciones Realizadas</label>
-            <input id="actions" type="text" formControlName="actions">
+            <input id="actions" type="text" 
+            name="actions"
+            formControlName="actions">
           </div>
 
           <div class="form-group">
             <label for="support">Soporte</label>
-            <input id="support" type="text" formControlName="support">
+            <input id="support" type="text" 
+            name="support"
+            formControlName="support">
           </div>
         </div>
       </div>

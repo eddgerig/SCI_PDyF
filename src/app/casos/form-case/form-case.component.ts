@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Case } from '../../models/case.model';
@@ -16,18 +16,21 @@ import { NgIf } from '@angular/common';
   styleUrls: ['./form-case.component.css'],
 })
 export class FormCaseComponent {
-  caseForm: FormGroup;
+  
   showRegistrarAvances: boolean = false;
   @Input()casoSelected : Case = new Case;
-
+  caseForm!: FormGroup;
 
       
 
   constructor(
     private fb: FormBuilder,
     private caseService: CaseService,
+    
   
   ) {
+    this.loadForm();
+    /*
     this.caseForm = this.fb.group({
       caseNumber: ['', Validators.required],
       affectedMobile: ['', Validators.required],
@@ -47,10 +50,61 @@ export class FormCaseComponent {
       supportArea: [''],
       actions: [''],
       support: [''],
-    });
+    });*/
   }
   ngOnInit() {
-    console.log("Form Case Component", this.casoSelected)
+    console.log("Form Case Component", this.casoSelected.observacion)
+    
+    if(!this.casoSelected ){
+          this.casoSelected = new Case();
+        }
+    this.setForm(); 
+  }
+  loadForm(): void {
+    this.caseForm = this.fb.group({
+      caseNumber: [null, Validators.required],
+      affectedMobile: [null, Validators.required],
+      irregularitySubtype: [null],
+      duration: [null],
+      detection: [null],
+      conclusions: [null],
+      startDate: [null, Validators.required],
+      caseType: [null, Validators.required],
+      objective: [null],
+      description: [null],
+      diagnostic: [null],
+      observations: [null],
+      investigator: [null, Validators.required],
+      irregularityType: [null, Validators.required],
+      incidence: [null],
+      supportArea: [null],
+      actions: [null],
+      support: [null],
+    });
+  }
+
+  setForm(): void {
+    this.caseForm.reset({
+     caseNumber: this.casoSelected.nro_expediente,
+     affectedMobile:this.casoSelected.affectedMobile,
+      irregularitySubtype: this.casoSelected.irregularitySubtype,
+      duration: this.casoSelected.duration,
+      detection: this.casoSelected.detection,
+      conclusions: this.casoSelected.conclusions,
+      startDate: this.casoSelected.startDate,
+      caseType: this.casoSelected.caseType,
+      objective: this.casoSelected.objective,
+      description: this.casoSelected.description,
+      diagnostic: this.casoSelected.diagnostic,
+      observations: this.casoSelected.observacion,
+      investigator:this.casoSelected.investigator,
+      irregularityType: this.casoSelected.irregularityType,
+      incidence: this.casoSelected.incidence,
+      supportArea: this.casoSelected.incidence,
+      actions: this.casoSelected.actions,
+      support: this.casoSelected.support,
+     
+    });
   }
 
   onSubmit() {
