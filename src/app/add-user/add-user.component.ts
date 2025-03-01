@@ -109,6 +109,7 @@ export class AddUserComponent {
      
       )
     }
+    this.onGoBack();
     
     /*if (this.isFormValid()) {
       this.userAdded.emit(this.user); // Emitir el nuevo usuario
