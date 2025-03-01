@@ -71,51 +71,29 @@ app.on('window-all-closed', () => {
         FOREIGN KEY (investigador) REFERENCES usuario(id)
     )`);
 
-    // Crear la tabla
-    db.run(`CREATE TABLE IF NOT EXISTS entidad (
+    db.run(`CREATE TABLE IF NOT EXISTS entidades (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         tipo_brecha TEXT,
-        tipo_proy TEXT ,
-        proceso_corregido TEXT ,
-        proceso_realizado TEXT ,
-        investigador INTEGER ,
-        empresa TEXT ,
-        subtipo_ficha TEXT ,
-        tipo_irreg TEXT ,
-        subtipo_irreg TEXT ,
-        proced_casos TEXT ,
-        
-        FOREIGN KEY (investigador) REFERENCES usuario(id)
-    )`);
+        tipo_proyecto TEXT,
+        procesos_corregidos TEXT,
+        procesos_realizados TEXT,
+        investigadores TEXT,
+        empresas TEXT,
+        subtipo_ficha TEXT,
+        tipo_irregularidad TEXT,
+        subtipo_irregularidad TEXT,
+        procedencia_casos TEXT,
+        FOREIGN KEY (investigadores) REFERENCES usuario(id)
+    )`, (err) => {
+        if (err) {
+            console.error('Error al crear la tabla "entidad":', err.message);
+        } else {
+            console.log('Tabla "entidad" creada o verificada correctamente.');
+        }
+    });
 
-    // Crear la tabla
-    /*db.run(`CREATE TABLE IF NOT EXISTS avances (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        caso_inv INTEGER,
-        fecha TEXT ,
-        actividades_realizadas TEXT ,
-        personas_involucradas TEXT ,
-        monto_exp TEXT ,
-        estado TEXT ,
-        
-        FOREIGN KEY (investigador) REFERENCES usuario(id)
-        FOREIGN KEY (caso_inv) REFERENCES caso_investigador(id)
-    )`);
     
-
-    // Crear la tabla
-    db.run(`CREATE TABLE IF NOT EXISTS cerrar_caso (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        observ TEXT ,
-        caso_inv INTEGER,
-        conclusion TEXT ,
-        recomend TEXT ,
-        estado TEXT ,
-        
-        FOREIGN KEY (investigador) REFERENCES usuario(id)
-        FOREIGN KEY (caso_inv) REFERENCES caso_investigador(id)
-    )`);
-    */
+    
 });
 
 // Manejar la inserción de usuarios
@@ -173,6 +151,40 @@ ipcMain.on('obtener-rol', (event, user) => {
             event.reply('rol-obtenido', { error: err.message });
         } else {
             event.reply('rol-obtenido', { error: null, rol: row ? row.rol : null });
+        }
+    });
+});
+
+// Insertar en entidades
+ipcMain.on('insertar-entidad', (event, tipo_brecha, tipo_proyecto, procesos_corregidos, procesos_realizados, investigadores, empresas, subtipo_ficha, tipo_irregularidad, subtipo_irregularidad, procedencia_casos) => {
+    db.run(`INSERT INTO entidades (
+        tipo_brecha,
+        tipo_proyecto,
+        procesos_corregidos,
+        procesos_realizados,
+        investigadores,
+        empresas,
+        subtipo_ficha,
+        tipo_irregularidad,
+        subtipo_irregularidad,
+        procedencia_casos
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, 
+    [tipo_brecha, tipo_proyecto, procesos_corregidos, procesos_realizados, investigadores, empresas, subtipo_ficha, tipo_irregularidad, subtipo_irregularidad, procedencia_casos], function(err) {
+        if (err) {
+            event.reply('entidad-insertada', { error: err.message });
+        } else {
+            event.reply('entidad-insertada', { id: this.lastID });
+        }
+    });
+});
+
+// Consultar entidades
+ipcMain.on('consultar-entidades', (event) => {
+    db.all(`SELECT * FROM entidades`, [], (err, rows) => {
+        if (err) {
+            event.reply('entidades-consultadas', { error: err.message });
+        } else {
+            event.reply('entidades-consultadas', { entidades: rows });
         }
     });
 });
