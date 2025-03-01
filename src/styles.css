@@ -280,6 +280,10 @@ textarea {
   resize: vertical;
 }
 
+.table-container{
+  font-size: 11px;
+}
+
 .button-group {
   display: flex;
   justify-content: center;

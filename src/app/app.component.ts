@@ -74,6 +74,8 @@ export class AppComponent {
       this.usuarios = rows;
       console.log(this.usuarios);
     });
+
+
     /*
     this.entidadBdService.insertarEntidad(
       'brecha1',       // tipo_brecha
@@ -90,6 +92,100 @@ export class AppComponent {
     */
     // Recargar la lista de entidades después de la inserción
     //this.entidadBdService.cargarEntidades();
+
+
+
+/*
+
+
+
+    this.entidadBdService.insertarEntidad(
+      'brecha_seguridad',       // tipo_brecha
+      'proyecto_ciber_seguridad', // tipo_proyecto
+      'auditoria_seguridad',     // procesos_corregidos
+      'implementacion_firewall', // procesos_realizados
+      'Dr. Alejandro Torres',    // investigadores
+      'TechSecure S.A.',         // empresas
+      'ficha_seguridad',         // subtipo_ficha
+      'acceso_no_autorizado',    // tipo_irregularidad
+      'phishing',                // subtipo_irregularidad
+      'caso_2023_001'            // procedencia_casos
+    );
+    // Insertar entidad 4
+this.entidadBdService.insertarEntidad(
+  'brecha_privacidad',       // tipo_brecha
+  'proyecto_gestion_datos',  // tipo_proyecto
+  'encriptacion_datos',      // procesos_corregidos
+  'actualizacion_politicas', // procesos_realizados
+  'Dra. Laura Gutierrez',    // investigadores
+  'DataPrivacy Solutions',   // empresas
+  'ficha_privacidad',        // subtipo_ficha
+  'violacion_privacidad',    // tipo_irregularidad
+  'exposicion_datos',        // subtipo_irregularidad
+  'caso_2023_004'            // procedencia_casos
+);
+
+// Insertar entidad 5
+this.entidadBdService.insertarEntidad(
+  'brecha_etica',            // tipo_brecha
+  'proyecto_investigacion_medica', // tipo_proyecto
+  'revision_consentimientos', // procesos_corregidos
+  'capacitacion_etica',      // procesos_realizados
+  'Dr. Juan Perez',          // investigadores
+  'MedResearch Institute',   // empresas
+  'ficha_etica',             // subtipo_ficha
+  'manipulacion_resultados', // tipo_irregularidad
+  'conflicto_intereses',     // subtipo_irregularidad
+  'caso_2023_005'            // procedencia_casos
+);
+
+// Insertar entidad 6
+this.entidadBdService.insertarEntidad(
+  'brecha_financiera',       // tipo_brecha
+  'proyecto_auditoria_financiera', // tipo_proyecto
+  'revision_contable',       // procesos_corregidos
+  'implementacion_controles', // procesos_realizados
+  'Lic. Ana Martinez',       // investigadores
+  'FinanzasTransparentes S.A.', // empresas
+  'ficha_financiera',        // subtipo_ficha
+  'malversacion_fondos',     // tipo_irregularidad
+  'desvio_recursos',         // subtipo_irregularidad
+  'caso_2023_006'            // procedencia_casos
+);
+
+// Insertar entidad 7
+this.entidadBdService.insertarEntidad(
+  'brecha_operacional',      // tipo_brecha
+  'proyecto_gestion_operaciones', // tipo_proyecto
+  'optimizacion_procesos',   // procesos_corregidos
+  'automatizacion_tareas',   // procesos_realizados
+  'Ing. Carlos Lopez',       // investigadores
+  'OperaTech Solutions',     // empresas
+  'ficha_operacional',       // subtipo_ficha
+  'falla_procesos',          // tipo_irregularidad
+  'ineficiencia_operativa',  // subtipo_irregularidad
+  'caso_2023_007'            // procedencia_casos
+);
+
+// Insertar entidad 8
+this.entidadBdService.insertarEntidad(
+  'brecha_legal',            // tipo_brecha
+  'proyecto_cumplimiento_normativo', // tipo_proyecto
+  'revision_contratos',      // procesos_corregidos
+  'capacitacion_legal',      // procesos_realizados
+  'Dra. Maria Fernandez',    // investigadores
+  'LegalCompliance Corp.',   // empresas
+  'ficha_legal',             // subtipo_ficha
+  'incumplimiento_normativo', // tipo_irregularidad
+  'fraude_legal',            // subtipo_irregularidad
+  'caso_2023_008'            // procedencia_casos
+);
+
+
+*/
+
+
+
   }
 
 }
