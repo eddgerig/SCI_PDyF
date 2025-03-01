@@ -28,6 +28,8 @@ export class UsersMainComponent {
   showAddUserForm() {
     this.usuarioSelected = null
     this.showAddUser = true;
+    this.cdr.detectChanges();
+    console.log("click");
   }
 
   // Función para volver a la tabla

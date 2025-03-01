@@ -9,13 +9,13 @@
     <div class="user-main-header">
         <h1>Usuarios</h1>
 
-        <div class="buscar">
-            <app-search *ngIf="!showAddUser" (searchEvent)="onSearch($event)"></app-search>
-            <button class="add-user" (click)="showAddUserForm()" *ngIf="!showAddUser">
+        <div class="buscar" *ngIf="!showAddUser">
+            <app-search (searchEvent)="onSearch($event)"></app-search>
+            <button class="add-user" (click)="showAddUserForm()" >
               Agregar usuario
             </button>
           </div>
-        </div>
+    </div>
           
           <!-- Mostrar la tabla solo si showAddUser es false -->
           <div *ngIf="!showAddUser">

@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { Component, Input, EventEmitter, Output, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Case } from '../../models/case.model';
@@ -19,6 +19,7 @@ export class FormCaseComponent {
   
   showRegistrarAvances: boolean = false;
   @Input()casoSelected : Case = new Case;
+  @Output() goBack = new EventEmitter<void>();
   caseForm!: FormGroup;
 
       
@@ -26,6 +27,7 @@ export class FormCaseComponent {
   constructor(
     private fb: FormBuilder,
     private caseService: CaseService,
+    private cdr: ChangeDetectorRef 
     
   
   ) {
@@ -60,49 +62,58 @@ export class FormCaseComponent {
         }
     this.setForm(); 
   }
+
+  onGoBack() {
+    console.log("onGoBack")
+    this.goBack.emit(); // Emitir el evento
+  }
+
+
+
+
   loadForm(): void {
     this.caseForm = this.fb.group({
-      caseNumber: [null, Validators.required],
-      affectedMobile: [null, Validators.required],
-      irregularitySubtype: [null],
-      duration: [null],
-      detection: [null],
-      conclusions: [null],
-      startDate: [null, Validators.required],
-      caseType: [null, Validators.required],
-      objective: [null],
-      description: [null],
-      diagnostic: [null],
-      observations: [null],
-      investigator: [null, Validators.required],
-      irregularityType: [null, Validators.required],
-      incidence: [null],
-      supportArea: [null],
-      actions: [null],
-      support: [null],
+      nro_expediente: [null, Validators.required],
+      movil_afectado: [null, Validators.required],
+      subtipo_irregularidad: [null],
+      duracion: [null],
+      deteccion: [null],
+      conclusiones: [null],
+      fecha_inicio: [null, Validators.required],
+      tipo_caso: [null, Validators.required],
+      objetivo: [null],
+      modus_operandi: [null],
+      diagnostico: [null],
+      observaciones: [null],
+      investigador: [null, Validators.required],
+      tipo_irregularidad: [null, Validators.required],
+      incidencia: [null],
+      area_apoyo: [null],
+      estado: [null],
+      soporte: [null],
     });
   }
 
   setForm(): void {
     this.caseForm.reset({
-     caseNumber: this.casoSelected.nro_expediente,
-     affectedMobile:this.casoSelected.affectedMobile,
-      irregularitySubtype: this.casoSelected.irregularitySubtype,
-      duration: this.casoSelected.duration,
-      detection: this.casoSelected.detection,
-      conclusions: this.casoSelected.conclusions,
-      startDate: this.casoSelected.startDate,
-      caseType: this.casoSelected.caseType,
-      objective: this.casoSelected.objective,
-      description: this.casoSelected.description,
-      diagnostic: this.casoSelected.diagnostic,
-      observations: this.casoSelected.observacion,
-      investigator:this.casoSelected.investigator,
-      irregularityType: this.casoSelected.irregularityType,
-      incidence: this.casoSelected.incidence,
-      supportArea: this.casoSelected.incidence,
-      actions: this.casoSelected.actions,
-      support: this.casoSelected.support,
+     nro_expediente: this.casoSelected.nro_expediente,
+     movil_afectado:this.casoSelected.movil_afectado,
+      subtipo_irregularidad: this.casoSelected.subtipo_irregularidad,
+      duracion: this.casoSelected.duracion,
+      deteccion: this.casoSelected.deteccion,
+      conclusiones: this.casoSelected.conclusiones,
+      fecha_inicio: this.casoSelected.fecha_inicio,
+      tipo_caso: this.casoSelected.tipo_caso,
+      objetivo: this.casoSelected.objetivo,
+      modus_operandi: this.casoSelected.modus_operandi,
+      diagnostico: this.casoSelected.diagnostico,
+      observacion: this.casoSelected.observacion,
+      investigador:this.casoSelected.investigator,
+      tipo_irregularidad: this.casoSelected.tipo_irregularidad,
+      incidencia: this.casoSelected.incidencia,
+      area_apoyo: this.casoSelected.area_apoyo,
+      estado: this.casoSelected.estado,
+      soporte: this.casoSelected.soporte,
      
     });
   }
@@ -132,6 +143,9 @@ export class FormCaseComponent {
 
       //this.caseService.saveCase(caseData);
     }
+    this.onGoBack();
+    this.cdr.detectChanges();
+    
   }
 
   onCancel() {

@@ -2,45 +2,47 @@ export class Case {
 
    id: number;
    nro_expediente: string;
-   affectedMobile: string;
-   irregularitySubtype: string;
-   duration: number;
-   detection: string;
-   conclusions: string;
-   startDate: string;
-   caseType: string;
-   objective: string;
-   description: string;
-   diagnostic: string;
+   movil_afectado: string;
+   subtipo_irregularidad: string;
+   duracion: number;
+   deteccion: string;
+   conclusiones: string;
+   fecha_inicio: string;
+   tipo_caso: string;
+   objetivo: string;
+   modus_operandi: string;
+   diagnostico: string;
    observacion: string;
    investigator: number;
-   irregularityType: string;
-   incidence: string;
-   supportArea: string;
-   actions: string;
-   support: string;
+   tipo_irregularidad: string;
+   incidencia: string;
+   area_apoyo: string;
+   estado: string;
+   soporte: string;
  
   constructor(
   ) {
       this.id= 0,
       this.nro_expediente= "",
-      this.affectedMobile= "",
-      this.irregularitySubtype= "",
-      this.duration= 0,
-      this.detection= "",
-      this.conclusions= "",
-      this.startDate= "",
-      this.caseType= "",
-      this.objective= "",
-      this.description= "",
-      this.diagnostic= "",
+      this.movil_afectado= "",
+      this.subtipo_irregularidad= "",
+      this.objetivo= "",
+      this.modus_operandi= "",
+      this.area_apoyo= "",
+      this.fecha_inicio= "",
+      this.tipo_caso= "",
+      this.objetivo= "",
+      this.deteccion= "",
+      this.diagnostico= "",
       this.observacion= "",
       this.investigator= 0,
-      this.irregularityType= "",
-      this.incidence= "",
-      this.supportArea= "",
-      this.actions= "",
-      this.support= ""
+      this.tipo_irregularidad= "",
+      this.incidencia= "",
+      this.area_apoyo= "",
+      this.estado= "",
+      this.soporte= "",
+      this.conclusiones="",
+      this.duracion= 0
 
     }
 
