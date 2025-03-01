@@ -71,22 +71,28 @@ app.on('window-all-closed', () => {
         FOREIGN KEY (investigador) REFERENCES usuario(id)
     )`);
 
-    // Crear la tabla
-    db.run(`CREATE TABLE IF NOT EXISTS entidad (
+    db.run(`CREATE TABLE IF NOT EXISTS entidades (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         tipo_brecha TEXT,
-        tipo_proy TEXT ,
-        proceso_corregido TEXT ,
-        proceso_realizado TEXT ,
-        investigador TEXT ,
-        empresa TEXT ,
-        subtipo_ficha TEXT ,
-        tipo_irreg TEXT ,
-        subtipo_irreg TEXT ,
-        proced_casos TEXT ,
-        
-        FOREIGN KEY (investigador) REFERENCES usuario(id)
-    )`);
+        tipo_proyecto TEXT,
+        procesos_corregidos TEXT,
+        procesos_realizados TEXT,
+        investigadores TEXT,
+        empresas TEXT,
+        subtipo_ficha TEXT,
+        tipo_irregularidad TEXT,
+        subtipo_irregularidad TEXT,
+        procedencia_casos TEXT,
+        FOREIGN KEY (investigadores) REFERENCES usuario(id)
+    )`, (err) => {
+        if (err) {
+            console.error('Error al crear la tabla "entidad":', err.message);
+        } else {
+            console.log('Tabla "entidad" creada o verificada correctamente.');
+        }
+    });
+
+    
     
 });
 
@@ -133,6 +139,40 @@ ipcMain.on('obtener-rol', (event, user) => {
             event.reply('rol-obtenido', { error: err.message });
         } else {
             event.reply('rol-obtenido', { error: null, rol: row ? row.rol : null });
+        }
+    });
+});
+
+// Insertar en entidades
+ipcMain.on('insertar-entidad', (event, tipo_brecha, tipo_proyecto, procesos_corregidos, procesos_realizados, investigadores, empresas, subtipo_ficha, tipo_irregularidad, subtipo_irregularidad, procedencia_casos) => {
+    db.run(`INSERT INTO entidades (
+        tipo_brecha,
+        tipo_proyecto,
+        procesos_corregidos,
+        procesos_realizados,
+        investigadores,
+        empresas,
+        subtipo_ficha,
+        tipo_irregularidad,
+        subtipo_irregularidad,
+        procedencia_casos
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, 
+    [tipo_brecha, tipo_proyecto, procesos_corregidos, procesos_realizados, investigadores, empresas, subtipo_ficha, tipo_irregularidad, subtipo_irregularidad, procedencia_casos], function(err) {
+        if (err) {
+            event.reply('entidad-insertada', { error: err.message });
+        } else {
+            event.reply('entidad-insertada', { id: this.lastID });
+        }
+    });
+});
+
+// Consultar entidades
+ipcMain.on('consultar-entidades', (event) => {
+    db.all(`SELECT * FROM entidades`, [], (err, rows) => {
+        if (err) {
+            event.reply('entidades-consultadas', { error: err.message });
+        } else {
+            event.reply('entidades-consultadas', { entidades: rows });
         }
     });
 });
