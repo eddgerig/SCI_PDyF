@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ArchivosService } from '../../service/archivos.service';
 import { Archivo } from '../../models/archivosFactoryMethod.model';
 import { CommonModule } from '@angular/common';
@@ -10,7 +10,8 @@ import { CommonModule } from '@angular/common';
   templateUrl: './table-archivo.component.html',
   styleUrls: ['./table-archivo.component.css']
 })
-export class TableArchivoComponent implements OnInit {
+export class TableArchivoComponent {
+    @Output() onSelected: EventEmitter<any> = new EventEmitter<any>();
 
   archivos: Archivo[] = [];
 
@@ -21,7 +22,11 @@ export class TableArchivoComponent implements OnInit {
   ngOnInit(): void {
     this.cargarArchivos();
   }
+  onRowSelect(event: any): void {
+    console.log("Archivo seleccionado", event)
+    this.onSelected.next(event);
 
+  }
   cargarArchivos(): void {
     this.archivosService.consultarArchivos().subscribe(
       (archivos: Archivo[]) => {
@@ -39,5 +44,7 @@ export class TableArchivoComponent implements OnInit {
 
   verArchivo(archivo: Archivo): void {
     console.log('Ver archivo:', archivo);
+    this.onRowSelect(archivo);
+    
   }
 }

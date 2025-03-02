@@ -1,14 +1,14 @@
 <div class="case-main-container">
 
     <!--app-sidenav></app-sidenav-->
-    <div class="case-main-content">
+    <div class="case-main-content" >
     
         <div class="archivo-main-header">
             <button class="back-button" (click)="onGoBack()">atrás</button>
             
         </div>
        
-        <app-form-archivo></app-form-archivo>
+        <app-form-archivo  (goBack)="hideAddArchivoForm()" ></app-form-archivo>
         <!--
             <app-tabs (onSelected)="onSelected($event) "></app-tabs>
             <app-form-case *ngIf="activeTabId == 0"

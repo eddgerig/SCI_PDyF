@@ -16,10 +16,15 @@ import { AddArchivoComponent } from '../add-archivo/add-archivo.component';
 })
 export class ArchivoMainComponent {
   showAddArchivo = false;
-
+  archivoSelected: any = null;
+  
 constructor( private cdr: ChangeDetectorRef ) { }
 
+ngOnInit(){
+ 
+ 
 
+}
   showAddArchivoForm() {
     //this.casoSelected = null
     this.showAddArchivo = true;
@@ -31,6 +36,12 @@ constructor( private cdr: ChangeDetectorRef ) { }
     this.showAddArchivo = false;
     this.cdr.detectChanges();
   }
-
+  onArchivoSelected($event: any){
+    console.log('Archivo seleccionado desde archivo-main:', $event);
+ 
+    this.showAddArchivo = true;
+    this.archivoSelected = $event;
+    this.cdr.detectChanges();
+  }
 
 }

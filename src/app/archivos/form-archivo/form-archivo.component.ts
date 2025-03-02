@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ArchivosService } from '../../service/archivos.service';
 import { Archivo, SerialEquiposRobados, Amonestado } from '../../models/archivosFactoryMethod.model'; 
@@ -13,6 +13,9 @@ import { Archivo, SerialEquiposRobados, Amonestado } from '../../models/archivos
 })
 export class FormArchivoComponent{
   @Output() goBack = new EventEmitter<void>();
+  
+  
+ 
   archivoForm!: FormGroup;
 
   constructor(
@@ -46,6 +49,7 @@ export class FormArchivoComponent{
         this.archivoForm.get('tipo')?.valueChanges.subscribe((tipo) => {
           this.activeTabId = tipo === 'serial' ? this.tabs.serial : this.tabs.amonestado;
         });
+        
   }
 
 

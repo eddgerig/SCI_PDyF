@@ -23,7 +23,7 @@
               
             
               <div *ngIf="!showAddArchivo">
-                <app-table-archivo ></app-table-archivo>
+                <app-table-archivo (onSelected)="onArchivoSelected($event) "></app-table-archivo>
               </div>
               
               
