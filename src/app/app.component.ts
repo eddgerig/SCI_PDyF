@@ -95,7 +95,7 @@ export class AppComponent {
     // Recargar la lista de entidades después de la inserción
     //this.entidadBdService.cargarEntidades();
 
-
+/*
     this.archivosService.insertarAmonestado(
       'AMON-001',
       'Caso-2023-001',
@@ -112,7 +112,7 @@ export class AppComponent {
       console.log('Archivos en el sistema:', archivos);
     });
 
-
+*/
 
 
 
