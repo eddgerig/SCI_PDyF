@@ -109,8 +109,13 @@
     font-weight: 500;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-top: 20px;
   }
-  
+  .error-message {
+    color: red;
+    margin-bottom: 10px;
+    text-align: center;
+  }
   .login-button:hover {
     background-color: #152747;
   }
