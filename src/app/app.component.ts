@@ -5,6 +5,7 @@ import { SidenavComponent } from './side-nav/side-nav.component';
 import { UsuarioBdService } from './service/usuario-bd.service';
 import { CaseService } from './service/case.service';
 import { EntidadBdService } from './service/entidad-bd.service';
+import { ArchivosService } from './service/archivos.service';
 
 
 
@@ -23,6 +24,7 @@ export class AppComponent {
     private usuarioBdService: UsuarioBdService,
     private caseService: CaseService,
     private entidadBdService: EntidadBdService,
+    private archivosService: ArchivosService
   ) {} 
 
   ngOnInit() {
@@ -92,6 +94,25 @@ export class AppComponent {
     */
     // Recargar la lista de entidades después de la inserción
     //this.entidadBdService.cargarEntidades();
+
+
+    this.archivosService.insertarAmonestado(
+      'AMON-001',
+      'Caso-2023-001',
+      'Amonestado',
+      'Descripción del amonestado',
+      123456789,
+      'Juan',
+      'Pérez',
+      'Empresa Ejemplo S.A.'
+    );
+    
+    // Obtener lista de archivos
+    this.archivosService.consultarArchivos().subscribe(archivos => {
+      console.log('Archivos en el sistema:', archivos);
+    });
+
+
 
 
 

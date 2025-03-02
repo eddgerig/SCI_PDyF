@@ -159,3 +159,74 @@ contextBridge.exposeInMainWorld('entidadesAPI', {
     }),
     onEntidadActualizada: (callback) => ipcRenderer.on('entidad-actualizada', callback),
 });
+
+
+
+
+
+// Archivos
+contextBridge.exposeInMainWorld('archivosAPI', {
+    insertarArchivo: (
+        id_archivo,
+        tipo,
+        descripcion,
+        caso,
+        serial,
+        tipoEquipo,
+        modelo,
+        observaciones,
+        cedula,
+        nombre,
+        apellido,
+        empresa
+    ) => ipcRenderer.send('insertar-archivo', {
+        id_archivo,
+        tipo,
+        descripcion,
+        caso,
+        serial,
+        tipoEquipo,
+        modelo,
+        observaciones,
+        cedula,
+        nombre,
+        apellido,
+        empresa
+    }),
+    onArchivoInsertado: (callback) => ipcRenderer.on('archivo-insertado', callback),
+
+    consultarArchivos: () => ipcRenderer.send('consultar-archivos'),
+    onArchivosConsultados: (callback) => ipcRenderer.on('archivos-consultados', callback),
+
+    actualizarArchivo: (
+        id_archivo,
+        tipo,
+        descripcion,
+        caso,
+        serial,
+        tipoEquipo,
+        modelo,
+        observaciones,
+        cedula,
+        nombre,
+        apellido,
+        empresa
+    ) => ipcRenderer.send('actualizar-archivo', {
+        id_archivo,
+        tipo,
+        descripcion,
+        caso,
+        serial,
+        tipoEquipo,
+        modelo,
+        observaciones,
+        cedula,
+        nombre,
+        apellido,
+        empresa
+    }),
+    onArchivoActualizado: (callback) => ipcRenderer.on('archivo-actualizado', callback),
+
+    eliminarArchivo: (id_archivo) => ipcRenderer.send('eliminar-archivo', id_archivo),
+    onArchivoEliminado: (callback) => ipcRenderer.on('archivo-eliminado', callback),
+});

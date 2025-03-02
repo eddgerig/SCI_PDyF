@@ -118,6 +118,21 @@ app.on('window-all-closed', () => {
         
         FOREIGN KEY (caso_inv) REFERENCES caso_investigador(id)
     )`);
+
+    db.run(`CREATE TABLE IF NOT EXISTS archivos (
+        id_archivo TEXT PRIMARY KEY,
+        tipo TEXT NOT NULL,
+        descripcion TEXT,
+        caso TEXT,
+        serial TEXT,
+        tipoEquipo TEXT,
+        modelo TEXT,
+        observaciones TEXT,
+        cedula INTEGER,
+        nombre TEXT,
+        apellido TEXT,
+        empresa TEXT
+    )`);
     
     
 });
@@ -584,3 +599,105 @@ ipcMain.on('actualizar-cerrar_caso', (event, { id,conclusion, recomend, observ }
     });
 });
 
+// Insertar archivo
+ipcMain.on('insertar-archivo', (event, archivo) => {
+    const query = `INSERT INTO archivos (
+        id_archivo,
+        tipo,
+        descripcion,
+        caso,
+        serial,
+        tipoEquipo,
+        modelo,
+        observaciones,
+        cedula,
+        nombre,
+        apellido,
+        empresa
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    
+    const params = [
+        archivo.id_archivo,
+        archivo.tipo,
+        archivo.descripcion,
+        archivo.caso,
+        archivo.serial,
+        archivo.tipoEquipo,
+        archivo.modelo,
+        archivo.observaciones,
+        archivo.cedula,
+        archivo.nombre,
+        archivo.apellido,
+        archivo.empresa
+    ];
+
+    db.run(query, params, function(err) {
+        if (err) {
+            event.reply('archivo-insertado', { error: err.message });
+        } else {
+            event.reply('archivo-insertado', { id: this.lastID });
+        }
+    });
+});
+
+// Consultar archivos
+ipcMain.on('consultar-archivos', (event) => {
+    db.all(`SELECT * FROM archivos`, [], (err, rows) => {
+        if (err) {
+            event.reply('archivos-consultados', { error: err.message });
+        } else {
+            event.reply('archivos-consultados', { archivos: rows });
+        }
+    });
+});
+
+// Actualizar archivo
+ipcMain.on('actualizar-archivo', (event, archivo) => {
+    const query = `UPDATE archivos SET
+        tipo = ?,
+        descripcion = ?,
+        caso = ?,
+        serial = ?,
+        tipoEquipo = ?,
+        modelo = ?,
+        observaciones = ?,
+        cedula = ?,
+        nombre = ?,
+        apellido = ?,
+        empresa = ?
+        WHERE id_archivo = ?`;
+    
+    const params = [
+        archivo.tipo,
+        archivo.descripcion,
+        archivo.caso,
+        archivo.serial,
+        archivo.tipoEquipo,
+        archivo.modelo,
+        archivo.observaciones,
+        archivo.cedula,
+        archivo.nombre,
+        archivo.apellido,
+        archivo.empresa,
+        archivo.id_archivo
+    ];
+
+    db.run(query, params, function(err) {
+        if (err) {
+            event.reply('archivo-actualizado', { error: err.message });
+        } else {
+            event.reply('archivo-actualizado', { success: true });
+        }
+    });
+});
+
+// Eliminar archivo
+ipcMain.on('eliminar-archivo', (event, id_archivo) => {
+    db.run(`DELETE FROM archivos WHERE id_archivo = ?`, [id_archivo], function(err) {
+        if (err) {
+            event.reply('archivo-eliminado', { error: err.message });
+        } else {
+            event.reply('archivo-eliminado', { success: true });
+        }
+    });
+});
