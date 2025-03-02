@@ -46,10 +46,11 @@ export class FormCaseComponent {
     this.user_id = this.usuarioBdService.getCurrentUserUser();
     
     this.rol = this.usuarioBdService.getCurrentUserRole();
-    console.log("Form Case Component", this.casoSelected)
-    
+    console.log("Form Case Component",this.user_id, this.casoSelected)
+    this.cdr.detectChanges()
     if(!this.casoSelected ){
-          this.casoSelected = new Case();
+      this.casoSelected = new Case();
+      this.cdr.detectChanges()
         }
     this.setForm(); 
     this.getUser(); 
@@ -135,6 +136,7 @@ export class FormCaseComponent {
   }
 
   setForm(): void {
+    console.log("setForm",this.user_id, this.casoSelected)
     this.caseForm.reset({
      id: this.casoSelected.id,
      nro_expediente: this.casoSelected.nro_expediente,
@@ -149,7 +151,7 @@ export class FormCaseComponent {
       modus_operandi: this.casoSelected.modus_operandi,
       diagnostico: this.casoSelected.diagnostico,
       observacion: this.casoSelected.observacion,
-      investigador:this.casoSelected.investigador,
+      investigador: this.casoSelected.investigador,
       tipo_irregularidad: this.casoSelected.tipo_irregularidad,
       incidencia: this.casoSelected.incidencia,
       area_apoyo: this.casoSelected.area_apoyo,
@@ -158,7 +160,7 @@ export class FormCaseComponent {
      
     });
     this.cdr.detectChanges();
-    console.log("setForm",this.casoSelected.investigador)
+    console.log("setForm",this.casoSelected)
   }
 
   onSubmit() {
