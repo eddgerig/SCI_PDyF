@@ -62,6 +62,11 @@ contextBridge.exposeInMainWorld('caso_inv', {
         ipcRenderer.send('actualizar-caso_inv', { id,nro_expediente, fecha_inicio,movil_afectado, tipo_caso,tipo_irregularidad, subtipo_irregularidad,objetivo,incidencia, modus_operandi, area_apoyo, deteccion, diagnostico,estado, observacion, soporte,investigador  })
     },
     
+    actualizarCasoCerrado_Soporte: (id,soporte) => {
+        console.log("actualizarCasoCerrado_Soporte preload",id,  soporte)
+        ipcRenderer.send('actualizar-caso_cerrado_soport', { id,soporte })
+    },
+       // ipcRenderer.send('actualizar-caso-cerrado_soporte', { id,soporte }),
     buscarInv: (user) => ipcRenderer.send('buscar-inv', user),
     
     buscarCasoPorInv: (user) => ipcRenderer.send('buscar-caso_por_inv', user),

@@ -162,33 +162,45 @@ export class FormCaseComponent {
   }
 
   onSubmit() {
+    
     console.log("onSubmit",this.caseForm)
     if (this.caseForm.valid) {
       console.log("********",this.caseForm)
       if(this.caseForm.value['id'] != 0){
-  
-        this.caseService.actualizarCasoInv(
-          this.caseForm.value['id'],
-          this.caseForm.value['nro_expediente'],
-          this.caseForm.value['fecha_inicio'],
-          this.caseForm.value['movil_afectado'],
-          this.caseForm.value['tipo_caso'],
-          this.caseForm.value['tipo_irregularidad'],
-          this.caseForm.value['subtipo_irregularidad'],
-          this.caseForm.value['objetivo'],
-          this.caseForm.value['incidencia'],
-          this.caseForm.value['modus_operandi'],
-          this.caseForm.value['area_apoyo'],
-          this.caseForm.value['deteccion'],
-          this.caseForm.value['diagnostico'],
-          this.caseForm.value['estado'],
-          this.caseForm.value['observacion'],
-          this.caseForm.value['soporte'],
-          this.caseForm.value['investigador']
-       
-        )
+        if(this.activeTabId == 3){
+
+          this.caseService.actualizarCasoCerrado_Soporte(
+            this.caseForm.value['id'],
+            this.caseForm.value['soporte'],
+            
+         
+          )
+        }else{
+
+          this.caseService.actualizarCasoInv(
+            this.caseForm.value['id'],
+            this.caseForm.value['nro_expediente'],
+            this.caseForm.value['fecha_inicio'],
+            this.caseForm.value['movil_afectado'],
+            this.caseForm.value['tipo_caso'],
+            this.caseForm.value['tipo_irregularidad'],
+            this.caseForm.value['subtipo_irregularidad'],
+            this.caseForm.value['objetivo'],
+            this.caseForm.value['incidencia'],
+            this.caseForm.value['modus_operandi'],
+            this.caseForm.value['area_apoyo'],
+            this.caseForm.value['deteccion'],
+            this.caseForm.value['diagnostico'],
+            this.caseForm.value['estado'],
+            this.caseForm.value['observacion'],
+            this.caseForm.value['soporte'],
+            this.caseForm.value['investigador']
+         
+          )
+        }
       }else{
-  
+        
+        
         this.caseService.insertarCaso_inv(
           this.caseForm.value['nro_expediente'],
           this.caseForm.value['fecha_inicio'],

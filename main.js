@@ -392,6 +392,11 @@ ipcMain.on('actualizar-caso_inv', (event, { id, nro_expediente, fecha_inicio,mov
 
 
 
+
+
+    
+    
+    
     ipcMain.on('actualizar-entidad', (event, {
     id,
     tipo_brecha,
@@ -547,6 +552,17 @@ ipcMain.on('actualizar-avances', (event, { id,actividades, personas, monto_expue
             event.reply('avances-actualizado', { error: err.message });
         } else {
             event.reply('avances-actualizado', { success: true, id });
+        }
+    });
+});
+
+ipcMain.on('actualizar-caso_cerrado_soport', (event, { id,soporte }) => {
+    db.run(`UPDATE caso_investigador SET soporte = ? WHERE id = ?`, 
+        [soporte, id], function(err) {
+        if (err) {
+            event.reply('caso_cerrado_soport-actualizado', { error: err.message });
+        } else {
+            event.reply('caso_cerrado_soport-actualizado', { success: true, id });
         }
     });
 });

@@ -101,6 +101,14 @@ export class CaseService {
     console.log("actualizarCasoInv", soporte);
     (window as any).caso_inv.actualizarCasoInv(id,nro_expediente, fecha_inicio,movil_afectado, tipo_caso,tipo_irregularidad, subtipo_irregularidad,objetivo,incidencia, modus_operandi, area_apoyo, deteccion, diagnostico,estado, observacion, soporte,investigador );
   }
+  public actualizarCasoCerrado_Soporte(
+    id:number,
+    soporte   :string,
+    ) {
+    // Llama a la API expuesta
+    console.log("actualizarCasoCerrado_Soporte", soporte);
+    (window as any).caso_inv.actualizarCasoCerrado_Soporte(id,soporte );
+  }
 
 
   public buscarInv(): Observable<Array<any>> {
