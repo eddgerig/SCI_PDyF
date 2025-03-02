@@ -1,31 +1,20 @@
 <div class="table-container">
-    <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Tipo archivo</th>
-            <th>Descripción</th>
-            <th>Estado</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-            <!--div 
-          <tr *ngFor="let usuario of usuarios">
-            <td >{{ usuario.cedula }}</td>
-            <td>{{ usuario.nombre }}</td>
-            <td>{{ usuario.correo }}</td>
-            <td>{{ usuario.rol }}</td>
-            <td><button class="edit" (click)="editarUsuario(usuario)">✏️</button></td>
-            
-          </tr>-->
-        </tbody>
-      </table>
-      
-      <!--div class="pagination">
-        <button (click)="previousPage()" [disabled]="currentPage === 1">Anterior</button>
-        <span>Página {{ currentPage }} de {{ totalPages }}</span>
-        <button (click)="nextPage()" [disabled]="currentPage === totalPages">Siguiente</button>
-      </div-->
-
+  <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Tipo archivo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let archivo of archivos">
+          <td>{{ archivo.id_archivo }}</td>
+          <td>{{ archivo.tipo }}</td>
+          <td>
+            <button class="back-button" (click)="verArchivo(archivo)">👁️ Ver</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 </div>
