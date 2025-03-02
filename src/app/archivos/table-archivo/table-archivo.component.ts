@@ -1,15 +1,43 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ArchivosService } from '../../service/archivos.service';
 import { Archivo } from '../../models/archivosFactoryMethod.model';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-table-archivo',
-  standalone: true,
+  standalone:true,
   imports: [CommonModule],
   templateUrl: './table-archivo.component.html',
-  styleUrl: './table-archivo.component.css'
+  styleUrls: ['./table-archivo.component.css']
 })
-export class TableArchivoComponent {
+export class TableArchivoComponent implements OnInit {
 
+  archivos: Archivo[] = [];
+
+  constructor(private archivosService: ArchivosService,
+    private cdr: ChangeDetectorRef,
+  ) { }
+
+  ngOnInit(): void {
+    this.cargarArchivos();
+  }
+
+  cargarArchivos(): void {
+    this.archivosService.consultarArchivos().subscribe(
+      (archivos: Archivo[]) => {
+        this.archivos = archivos;
+        console.log("Archivo desde table:", this.archivos);
+        this.cdr.detectChanges();
+      },
+      (error: any) => {
+        console.error('Error al cargar archivos:', error);
+      }
+
+    );
+    
+  }
+
+  verArchivo(archivo: Archivo): void {
+    console.log('Ver archivo:', archivo);
+  }
 }
