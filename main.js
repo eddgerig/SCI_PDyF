@@ -169,6 +169,19 @@ ipcMain.on('buscar-inv', (event, user) => {
     });
 });
 
+//Buscar casos de inv por inestigador
+ipcMain.on('buscar-caso_por_inv', (event, user) => {
+    console.log('caso_por_inv-buscado ');
+    db.all(`SELECT * FROM caso_investigador WHERE investigador =  ?`, [user], (err, rows) => {
+        if (err) {
+            event.reply('caso_por_inv-buscado', { error: err.message });
+        } else {
+            console.log('caso_por_inv-buscado', rows);
+            event.reply('caso_por_inv-buscado', { success: true, usuarios: rows });
+        }
+    });
+});
+
 //Rol del usuario:
 ipcMain.on('obtener-rol', (event, user) => {
     db.get(`SELECT rol FROM usuario WHERE usuario = ?`, [user], (err, row) => {
@@ -324,7 +337,7 @@ ipcMain.on('consultar-caso_inv', (event) => {
     db.all(`SELECT 
                 ci.*,           -- Selecciona todos los campos de caso_investigador
                 u.nombre,       -- Selecciona el nombre del investigador (puede ser NULL)
-                u.correo        -- Selecciona el email del investigador (puede ser NULL)
+                u.cedula        -- Selecciona el email del investigador (puede ser NULL)
             FROM 
                 caso_investigador ci
             LEFT JOIN 
@@ -477,9 +490,9 @@ ipcMain.on('actualizar-entidad', (event, {
 
 
 // Manejar la inserción de AVANCES
-ipcMain.on('insertar-avances', (event,actividades_realizadas, personas_involucradas, monto_exp) => {
+ipcMain.on('insertar-avances', (event,casoSelected,actividades_realizadas, personas_involucradas, monto_exp) => {
     console.log('insertar-avances',actividades_realizadas, personas_involucradas, monto_exp)
-    db.run(`INSERT INTO avances (actividades_realizadas, personas_involucradas, monto_exp) VALUES (?, ?, ?)`, [actividades_realizadas, personas_involucradas, monto_exp], function(err) {
+    db.run(`INSERT INTO avances (caso_inv, actividades_realizadas, personas_involucradas, monto_exp) VALUES (?, ?, ?, ?)`, [casoSelected,actividades_realizadas, personas_involucradas, monto_exp], function(err) {
         if (err) {
             event.reply('avances-insertado', { error: err.message });
         } else {
@@ -490,12 +503,84 @@ ipcMain.on('insertar-avances', (event,actividades_realizadas, personas_involucra
 
 // Manejar la consulta de AVANCES
 ipcMain.on('consultar-avances', (event) => {
-    db.all(`SELECT * FROM usuario`, [], (err, rows) => {
+    db.all(`SELECT * FROM avances`, [], (err, rows) => {
         if (err) {
             event.reply('avances-consultados', { error: err.message });
         } else {
             console.log('avances-consultados', rows);
-            event.reply('avances-consultados', { usuarios: rows });
+            event.reply('avances-consultados', { data: rows });
         }
     });
 });
+
+ipcMain.on('buscar-avance', (event, caso_id) => {
+    console.log('avance-buscado ');
+    db.all(`SELECT * FROM avances WHERE caso_inv =  ?`, [caso_id], (err, rows) => {
+        if (err) {
+            event.reply('avance-buscado', { error: err.message });
+        } else {
+            console.log('avance-buscado', rows);
+            event.reply('avance-buscado', { success: true, data: rows });
+        }
+    });
+});
+
+ipcMain.on('actualizar-avances', (event, { id,actividades, personas, monto_expuesto }) => {
+    db.run(`UPDATE avances SET actividades_realizadas = ?, personas_involucradas = ?, monto_exp = ? WHERE id = ?`, 
+        [actividades, personas, monto_expuesto, id], function(err) {
+        if (err) {
+            event.reply('avances-actualizado', { error: err.message });
+        } else {
+            event.reply('avances-actualizado', { success: true, id });
+        }
+    });
+});
+
+//Cerrar caso
+// Manejar la inserción de AVANCES
+ipcMain.on('insertar-cerrar_caso', (event,casoSelected,conclusion, recomend, observ) => {
+    console.log('insertar-cerrar_caso',conclusion, recomend, observ)
+    db.run(`INSERT INTO cerrar_caso (caso_inv, conclusion, recomend, observ) VALUES (?, ?, ?, ?)`, [casoSelected,conclusion, recomend, observ], function(err) {
+        if (err) {
+            event.reply('cerrar_caso-insertado', { error: err.message });
+        } else {
+            event.reply('cerrar_caso-insertado', { id: this.lastID });
+        }
+    });
+});
+
+// Manejar la consulta de AVANCES
+ipcMain.on('consultar-cerrar_caso', (event) => {
+    db.all(`SELECT * FROM cerrar_caso`, [], (err, rows) => {
+        if (err) {
+            event.reply('cerrar_caso-consultados', { error: err.message });
+        } else {
+            console.log('cerrar_caso-consultados', rows);
+            event.reply('cerrar_caso-consultados', { data: rows });
+        }
+    });
+});
+
+ipcMain.on('buscar-cerrar_caso', (event, caso_id) => {
+    console.log('cerrar_caso-buscado ');
+    db.all(`SELECT * FROM cerrar_caso WHERE caso_inv =  ?`, [caso_id], (err, rows) => {
+        if (err) {
+            event.reply('cerrar_caso-buscado', { error: err.message });
+        } else {
+            console.log('cerrar_caso-buscado', rows);
+            event.reply('cerrar_caso-buscado', { success: true, data: rows });
+        }
+    });
+});
+
+ipcMain.on('actualizar-cerrar_caso', (event, { id,conclusion, recomend, observ }) => {
+    db.run(`UPDATE cerrar_caso SET conclusion = ?, recomend = ?, observ = ? WHERE id = ?`, 
+        [conclusion, recomend, observ, id], function(err) {
+        if (err) {
+            event.reply('cerrar_caso-actualizado', { error: err.message });
+        } else {
+            event.reply('cerrar_caso-actualizado', { success: true, id });
+        }
+    });
+});
+

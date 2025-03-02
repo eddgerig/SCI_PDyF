@@ -6,18 +6,18 @@
         <!-- Column 1 -->
         <div class="form-column">
           <div class="form-group">
-            <label for="nro_expediente">Nro de Expediente</label>
+            <label for="nro_expediente">Nro de Expediente *</label>
             <input 
-            type="text"
+            type="text" 
             id="nro_expediente"
             name="nro_expediente" 
             formControlName="nro_expediente"
-            required
+            required 
             >
           </div>
 
           <div class="form-group">
-            <label for="movil_afectado">Movil Afectado</label>
+            <label for="movil_afectado">Movil Afectado *</label>
             <input 
             id="movil_afectado" 
             type="text" 
@@ -34,6 +34,8 @@
             id="subtipo_irregularidad" formControlName="subtipo_irregularidad"
             name="subtipo_irregularidad">
               <option value="">Seleccionar</option>
+              <option *ngFor="let par of entidades" [value]="par.id">
+                {{ par.subtipo_irregularidad }}</option>
               <!-- Add options here -->
             </select>
           </div>
@@ -63,14 +65,14 @@
         <!-- Column 2 -->
         <div class="form-column">
           <div class="form-group">
-            <label for="fecha_inicio">Fecha Inicio</label>
+            <label for="fecha_inicio">Fecha Inicio *</label>
             <input id="fecha_inicio" type="text" 
             name="fecha_inicio"
             formControlName="fecha_inicio">
           </div>
 
           <div class="form-group">
-            <label for="tipo_caso">Tipo de Caso</label>
+            <label for="tipo_caso">Tipo de Caso *</label>
             <input id="tipo_caso" 
             type="text" 
             name="tipo_caso"
@@ -112,7 +114,8 @@
           <div class="form-group">
             <label for="investigador">Investigador</label>
             <select id="investigador" formControlName="investigador"
-            name="investigador"
+            name="investigador" 
+             
             [(ngModel)]="casoSelected.investigador"
             >
               <option >Seleccionar {{casoSelected.investigador}} </option>
@@ -127,6 +130,9 @@
             name="tipo_irregularidad"
             >
               <option value="">Seleccionar</option>
+              <option *ngFor="let par of entidades" [value]="par.id">
+                {{ par.tipo_irregularidad }}</option>
+              
               <!-- Add options here -->
             </select>
           </div>

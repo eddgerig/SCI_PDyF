@@ -64,6 +64,37 @@ contextBridge.exposeInMainWorld('caso_inv', {
     
     buscarInv: (user) => ipcRenderer.send('buscar-inv', user),
     
+    buscarCasoPorInv: (user) => ipcRenderer.send('buscar-caso_por_inv', user),
+    
+    actualizarCasoAvanc: (id,actividades, personas, monto_expuesto ) => {
+        //console.log("actualizarCasoInv preload", soporte)
+        ipcRenderer.send('actualizar-avances', { id,actividades, personas, monto_expuesto})
+    },
+    
+    
+    buscarCaso_Avance: (caso_id) => ipcRenderer.send('buscar-avance', caso_id),
+    
+
+    insertarCaso_Avanc: (
+        casoSelected,actividades_realizadas, personas_involucradas, monto_exp
+    ) => ipcRenderer.send('insertar-avances', 
+        casoSelected, actividades_realizadas, personas_involucradas, monto_exp
+        ),
+    ///cerrar caso
+    actualizarCasoCerrado: (id,conclusion, recomend, obser ) => {
+        //console.log("actualizarCasoInv preload", soporte)
+        ipcRenderer.send('actualizar-cerrar_caso', { id,conclusion, recomend, obser})
+    },
+    
+    
+    buscarCaso_Cerrado: (caso_id) => ipcRenderer.send('buscar-cerrar_caso', caso_id),
+    
+
+    insertarCaso_Cerrado: (
+        casoSelected,conclusion, recomend, observ
+    ) => ipcRenderer.send('insertar-cerrar_caso', 
+        casoSelected,conclusion, recomend, observ
+        ),
     //gettUser: () => ipcRenderer.send('consultar-usuarios'),
     ipcRenderer: {
         send: (channel, data) => ipcRenderer.send(channel, data),

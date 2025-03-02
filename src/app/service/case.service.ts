@@ -8,6 +8,7 @@ import { Observable, Subject } from 'rxjs';
 export class CaseService {
   private currentCase: Case | null = null;
   private loginSubject = new Subject<Array<any>>();
+  private loginSubject_avance = new Subject<Array<any>>();
   constructor() {}
 
   saveCase(caseData: Case) {
@@ -66,6 +67,7 @@ export class CaseService {
     investigador
     );
   }
+  
   public consultarCaso_Inv(callback: (rows: any[]) => void) {
     (window as any).caso_inv.ipcRenderer.send('consultar-caso_inv');
 
@@ -123,4 +125,140 @@ export class CaseService {
         console.log(`buscar-inv retirn`);
     return this.loginSubject.asObservable();
   }
+
+
+  public buscarCasoPorInv(user: number): Observable<Array<any>> {
+  
+    console.log(`buscarCasoPorInv`);
+      (window as any).caso_inv.buscarCasoPorInv(user);
+
+      (window as any).caso_inv.ipcRenderer.on('caso_por_inv-buscado', (event: any, arg: { error: any; usuarios: any; }) => {
+          if (arg.error) {
+              console.error(arg.error);
+          } else {
+            console.log(`buscar-caso_por_inv`, arg);
+            //this.usuariosBuscados = arg.usuarios;
+            /*if (this.usuariosBuscados.length === 0) {
+              console.log(`No se encontraron usuarios con el nombre "${user}".`);
+              } else {
+                console.log(`Usuarios encontrados:`, this.usuariosBuscados);
+            }*/
+           this.loginSubject.next(arg.usuarios);
+          }
+        });
+        console.log(`buscar-caso_por_inv retirn`);
+    return this.loginSubject.asObservable();
+  }
+
+
+  public insertarCaso_Avanc(
+    
+    casoSelected :number,
+    actividades_realizadas :string,
+    personas_involucradas   :string,
+    monto_exp   :string,
+  ) {
+    // Llama a la API expuesta
+    console.log("insertarCaso_Avanc");
+
+    (window as any).caso_inv.insertarCaso_Avanc(
+      casoSelected, actividades_realizadas, personas_involucradas, monto_exp
+    );
+  }
+  public consultarCaso_Avanc(callback: (rows: any[]) => void) {
+    (window as any).caso_inv.ipcRenderer.send('consultar-avances');
+
+    (window as any).caso_inv.ipcRenderer.on('avances-consultados', (event: any, arg: { error: any; data: any[]; }) => {
+        if (arg.error) {
+            console.error(arg.error);
+        } else {
+          console.log("consulta", arg)
+            callback(arg.data);
+        }
+    });
+  }
+  public buscarCaso_Avance(caso_id: number): Observable<Array<any>> {
+  
+    console.log(`buscarCaso_Avance`);
+      (window as any).caso_inv.buscarCaso_Avance(caso_id);
+
+      (window as any).caso_inv.ipcRenderer.on('avance-buscado', (event: any, arg: { error: any; data: any; }) => {
+          if (arg.error) {
+              console.error(arg.error);
+          } else {
+            console.log(`buscar-inv******`, arg);
+            
+            this.loginSubject_avance.next(arg.data);
+          }
+        });
+        
+        console.log(`buscar-inv******`);
+    return this.loginSubject_avance.asObservable();
+  }
+
+  public actualizarCasoAvanc(id:number,
+    actividades :string,
+    personas   :string,
+    monto_expuesto   :string) {
+    // Llama a la API expuesta
+    console.log("actualizarCasoAvanc", );
+    (window as any).caso_inv.actualizarCasoAvanc(id,actividades, personas, monto_expuesto);
+  }
+
+
+  //caso cerrado
+  public insertarCaso_Cerrado(
+    
+    casoSelected :number,
+    conclusion :string,
+    recomend   :string,
+    observ   :string,
+  ) {
+    // Llama a la API expuesta
+    console.log("insertarCaso_Cerrado");
+
+    (window as any).caso_inv.insertarCaso_Cerrado(
+      casoSelected, conclusion, recomend, observ
+    );
+  }
+  public consultarCaso_Cerrado(callback: (rows: any[]) => void) {
+    (window as any).caso_inv.ipcRenderer.send('consultar-cerrar_caso');
+
+    (window as any).caso_inv.ipcRenderer.on('cerrar_caso-consultados', (event: any, arg: { error: any; data: any[]; }) => {
+        if (arg.error) {
+            console.error(arg.error);
+        } else {
+          console.log("consulta", arg)
+            callback(arg.data);
+        }
+    });
+  }
+  public buscarCaso_Cerrado(caso_id: number): Observable<Array<any>> {
+  
+    console.log(`buscarCaso_Cerrado`);
+      (window as any).caso_inv.buscarCaso_Cerrado(caso_id);
+
+      (window as any).caso_inv.ipcRenderer.on('cerrar_caso-buscado', (event: any, arg: { error: any; data: any; }) => {
+          if (arg.error) {
+              console.error(arg.error);
+          } else {
+            console.log(`buscar-inv******`, arg);
+            
+            this.loginSubject_avance.next(arg.data);
+          }
+        });
+        
+        console.log(`buscar-inv******`);
+    return this.loginSubject_avance.asObservable();
+  }
+
+  public actualizarCasoCerrado(id:number,
+    conclusion :string,
+    recomend   :string,
+    obser   :string) {
+    // Llama a la API expuesta
+    console.log("actualizarCasoCerrado", );
+    (window as any).caso_inv.actualizarCasoCerrado(id,conclusion, recomend, obser);
+  }
+
 }

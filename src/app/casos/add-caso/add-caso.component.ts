@@ -51,7 +51,10 @@ export class AddCasoComponent {
       onSelected($event: number){
         console.log('onSelected', $event);
         // Aquí puedes agregar la lógica para manejar el evento de selección del usuario
-        this.activeTabId = $event;
+       if(this.casoSelected){
+
+         this.activeTabId = $event;
+       }
        
         this.cdr.detectChanges();
       }

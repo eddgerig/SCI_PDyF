@@ -9,6 +9,7 @@ export class UsuarioBdService {
 
   usuarios: any[] = [];
   private currentUserRole: number | null = null;
+  private currentUserUser: number | null = null;
   private loginSubject = new Subject<boolean>();
   constructor() { }
 
@@ -95,11 +96,13 @@ public login(user: string, pass: string): Observable<boolean> {
         console.error(arg.error);
         this.loginSubject.next(false);
       } else {
-        console.log('login_valid:', arg);
         //const isValid = arg.rows.length > 0;
+        console.log('login_valid:', arg);
         const isValid = IUser.iniciar_session(arg.rows.length);
         if (isValid) {
           this.currentUserRole = arg.rows[0].rol; 
+          this.currentUserUser = arg.rows[0].id; 
+         // console.log('rows[0].id; :', arg.rows[0].id);
         }
         
         this.loginSubject.next(isValid);
@@ -117,9 +120,13 @@ public login(user: string, pass: string): Observable<boolean> {
  public getCurrentUserRole(): number | null {
   return this.currentUserRole;
 }
+ public getCurrentUserUser(): number | null {
+  return this.currentUserUser;
+}
 
 // Método para limpiar el rol (opcional, útil en logout)
 public clearCurrentUserRole(): void {
+  this.currentUserRole = null;
   this.currentUserRole = null;
 }
 

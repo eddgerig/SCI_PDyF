@@ -22,11 +22,15 @@ export class FormCaseComponent {
   
   showRegistrarAvances: boolean = false;
   @Input()casoSelected : Case = new Case();
+  @Input()activeTabId : number = -1;
   @Output() goBack = new EventEmitter<void>();
   caseForm!: FormGroup;
   usuarios: any = []
   entidades: IEntidad[] = [];  
 
+  isDisabled: boolean = true; // Inicialmente, el select está habilitado
+  user_id: number |null = null;
+  rol: number |null = null;
   constructor(
     private fb: FormBuilder,
     private caseService: CaseService,
@@ -36,29 +40,12 @@ export class FormCaseComponent {
   
   ) {
     this.loadForm();
-    /*
-    this.caseForm = this.fb.group({
-      caseNumber: ['', Validators.required],
-      affectedMobile: ['', Validators.required],
-      irregularitySubtype: [''],
-      duration: [''],
-      detection: [''],
-      conclusions: [''],
-      startDate: ['', Validators.required],
-      caseType: ['', Validators.required],
-      objective: [''],
-      description: [''],
-      diagnostic: [''],
-      observations: [''],
-      investigator: ['', Validators.required],
-      irregularityType: ['', Validators.required],
-      incidence: [''],
-      supportArea: [''],
-      actions: [''],
-      support: [''],
-    });*/
+    
   }
   ngOnInit() {
+    this.user_id = this.usuarioBdService.getCurrentUserUser();
+    
+    this.rol = this.usuarioBdService.getCurrentUserRole();
     console.log("Form Case Component", this.casoSelected)
     
     if(!this.casoSelected ){
@@ -66,6 +53,7 @@ export class FormCaseComponent {
         }
     this.setForm(); 
     this.getUser(); 
+    this.cargarEntidades(); 
   }
 
   onGoBack() {
@@ -78,17 +66,48 @@ export class FormCaseComponent {
     console.log("refresh")
     this.caseService.buscarInv().subscribe((value:any[]) => {
       this.usuarios = value
+      this.updateSelectDisabledState()
       console.log("array ", value)
       this.cdr.detectChanges();
     });
   }
-  /*cargarEntidades() {
+
+  updateSelectDisabledState() {
+   // this.isDisabled = this.casoSelected.investigador === null; // Cambia la lógica según tu necesidad
+    if (this.rol != 1) {
+      this.caseForm.get('investigador')?.disable(); // Deshabilita el control
+    } else {
+      this.caseForm.get('investigador')?.enable(); // Habilita el control
+    }
+    
+    if (this.activeTabId == 3) {
+      this.caseForm.get('investigador')?.disable(); // Deshabilita el control
+      this.caseForm.get('nro_expediente')?.disable(); // Habilita el control
+      this.caseForm.get('movil_afectado')?.disable(); // Habilita el control
+      this.caseForm.get('subtipo_irregularidad')?.disable(); // Habilita el control
+      this.caseForm.get('duracion')?.disable(); // Habilita el control
+      this.caseForm.get('deteccion')?.disable(); // Habilita el control
+      this.caseForm.get('conclusiones')?.disable(); // Habilita el control
+      this.caseForm.get('fecha_inicio')?.disable(); // Habilita el control
+      this.caseForm.get('tipo_caso')?.disable(); // Habilita el control
+      this.caseForm.get('objetivo')?.disable(); // Habilita el control
+      this.caseForm.get('modus_operandi')?.disable(); // Habilita el control
+      this.caseForm.get('diagnostico')?.disable(); // Habilita el control
+      this.caseForm.get('observaciones')?.disable(); // Habilita el control
+      this.caseForm.get('tipo_irregularidad')?.disable(); // Habilita el control
+      this.caseForm.get('incidencia')?.disable(); // Habilita el control
+      this.caseForm.get('area_apoyo')?.disable(); // Habilita el control
+      this.caseForm.get('estado')?.disable(); // Habilita el control
+    }
+  }
+  cargarEntidades() {
       this.entidadBdService.consultarEntidades().subscribe((entidades: any[]) => {
         this.entidades = entidades.map(entidad => IEntidad.fromObject(entidad));
+        console.log("cargarEntidades ",this.entidades)
         //this.calcularTotalPaginas();
         this.cdr.detectChanges(); // Forzar la detección de cambios
       });
-    }*/
+    }
   loadForm(): void {
     this.caseForm = this.fb.group({
       id: [null],
@@ -193,31 +212,7 @@ export class FormCaseComponent {
       this.onGoBack();
       this.cdr.detectChanges();
      
-     /* const caseData = new Case(
-        this.caseForm.value.caseNumber,
-        this.caseForm.value.affectedMobile,
-        this.caseForm.value.irregularitySubtype,
-        this.caseForm.value.duration,
-        this.caseForm.value.detection,
-        this.caseForm.value.conclusions,
-        this.caseForm.value.startDate,
-        this.caseForm.value.caseType,
-        this.caseForm.value.objective,
-        this.caseForm.value.description,
-        this.caseForm.value.diagnostic,
-        this.caseForm.value.observations,
-        this.caseForm.value.investigator,
-        this.caseForm.value.irregularityType,
-        this.caseForm.value.incidence,
-        this.caseForm.value.supportArea,
-        this.caseForm.value.actions,
-        this.caseForm.value.support
-      );*/
-
-      //this.caseService.saveCase(caseData);
     }
-    this.onGoBack();
-    this.cdr.detectChanges();
     
   }
 

@@ -13,6 +13,7 @@ import { UsuarioBdService } from '../../service/usuario-bd.service';
 })
 export class TableCasosComponent {
   rol: number | null = null;
+  user_id: number |null = null;
   caso: any = []
   casoSelected: any = null;
   @Output() onSelected: EventEmitter<any> = new EventEmitter<any>();
@@ -25,21 +26,33 @@ export class TableCasosComponent {
     ) {} 
   
     ngOnInit() {
-      this.refresh();
-
+      
       this.rol = this.usuarioBdService.getCurrentUserRole();
+      this.user_id = this.usuarioBdService.getCurrentUserUser();
+      this.cdr.detectChanges();
       console.log("ROl DEL USUARIO TABLE CASOS:", this.rol);
+      this.refresh();
     }
      
   
   refresh(){
 
-    console.log("refresh")
-    this.caseService.consultarCaso_Inv((rows) => {
-      this.caso = rows;
-      console.log(this.caso);
-      this.cdr.detectChanges();
-    });
+    console.log("refresh",this.user_id )
+    if(this.user_id == 1){
+
+      this.caseService.consultarCaso_Inv((rows) => {
+        this.caso = rows;
+        console.log("consultarCaso_Inv",this.caso);
+        this.cdr.detectChanges();
+      });
+    }else{
+      this.caseService.buscarCasoPorInv(this.user_id || -1).
+      subscribe((rows) => {
+        this.caso = rows;
+        console.log("buscarCasoPorInv",this.caso);
+        this.cdr.detectChanges();
+      });
+    }
   }
 
   onRowSelect(event: any): void {
