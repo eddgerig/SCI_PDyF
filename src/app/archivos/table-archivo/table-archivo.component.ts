@@ -44,7 +44,20 @@ export class TableArchivoComponent {
 
   verArchivo(archivo: Archivo): void {
     console.log('Ver archivo:', archivo);
-    this.onRowSelect(archivo);
     
+  
+    // Construir el mensaje para el alert
+    const mensaje = `
+      ID Archivo: ${archivo.id_archivo}
+      
+      Tipo: ${archivo.tipo}
+      Descripción: ${archivo.descripcion}
+      
+      
+    `;
+    
+  
+    // Mostrar el alert con la información del archivo
+    alert(mensaje);
   }
 }
