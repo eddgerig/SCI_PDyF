@@ -110,6 +110,13 @@ table {
     
 }
 
+
+.archivo-main-container{
+  display: flex;
+  flex-direction: row;
+  
+}
+
 .reporte-main-header .buscar{
   margin-top: 60px;
  
@@ -118,6 +125,19 @@ table {
 }
 
 
+
+.archivo-main-header{
+  margin-bottom: 20px;
+ 
+ 
+ 
+}
+
+.registrar-archivo{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
 .reporte-main-header .buscar button{
   
   margin-top: -10px;
@@ -148,6 +168,16 @@ margin-top: 20px;
     border-style: none;
     width: 150px;
     cursor: pointer;
+}
+.add-archivo{
+  background-color: #031C30;
+  color: #fff;
+  padding: 12px;
+  height: 40px;
+  border-radius: 10px;
+  border-style: none;
+  width: 150px;
+  cursor: pointer;
 }
 
 .back-button{
