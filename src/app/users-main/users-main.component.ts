@@ -16,7 +16,7 @@ import { RouterModule } from '@angular/router';
 export class UsersMainComponent {
 
   usuarioSelected: any = null;
-  searchTerm: string = ''; // Almacena el término de búsqueda
+  searchTerm: string = '';
 
   showAddUser = false; // Variable de estado para controlar la visibilidad
 
@@ -46,7 +46,7 @@ export class UsersMainComponent {
 
   // Función para agregar un nuevo usuario a la tabla
   agregarUsuario(nuevoUsuario: any) {
-    // Aquí puedes agregar la lógica para enviar el nuevo usuario a la tabla
+    
     alert(`Datos del nuevo usuario:\n
       Nombre: ${nuevoUsuario.nombre}\n
       Apellido: ${nuevoUsuario.apellido}\n
@@ -63,7 +63,7 @@ export class UsersMainComponent {
 
   onUserSelected($event: any){
     console.log('Usuario seleccionado:', $event);
-    // Aquí puedes agregar la lógica para manejar el evento de selección del usuario
+   
     this.showAddUser = true;
     this.usuarioSelected = $event;
     this.cdr.detectChanges();
