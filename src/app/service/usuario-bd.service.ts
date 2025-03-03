@@ -37,9 +37,9 @@ export class UsuarioBdService {
     });
   }
   
-  public eliminarUsuario(id: number) {
+ /* public eliminarUsuario(id: number) {
     (window as any).myAPI.eliminarUsuario(id); 
-  }
+  }*/
   /*public buscarUser(user: string) {
     return (window as any).myAPI.buscarUser(user); 
   }*/
@@ -53,12 +53,7 @@ export class UsuarioBdService {
                 console.error(arg.error);
             } else {
               console.log(`Usuarios encontrados:`, arg);
-                //this.usuariosBuscados = arg.usuarios;
-                /*if (this.usuariosBuscados.length === 0) {
-                    console.log(`No se encontraron usuarios con el nombre "${user}".`);
-                } else {
-                    console.log(`Usuarios encontrados:`, this.usuariosBuscados);
-                }*/
+                
             }
         });
     } else {

@@ -11,7 +11,7 @@ export class CaseService {
   private loginSubject_avance = new Subject<Array<any>>();
   constructor() {}
 
-  saveCase(caseData: Case) {
+  /*saveCase(caseData: Case) {
     this.currentCase = caseData;
     console.log('Caso guardado:', this.currentCase);
   }
@@ -24,7 +24,7 @@ export class CaseService {
     this.currentCase = null;
   }
 
-
+*/
   
   public insertarCaso_inv(
     

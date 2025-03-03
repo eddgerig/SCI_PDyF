@@ -20,7 +20,7 @@ export class Case {
    estado: string;
    soporte: string;
  
-  constructor(
+  constructor( 
   ) {
       this.id= 0,
       this.nro_expediente= "",
@@ -34,19 +34,40 @@ export class Case {
       this.objetivo= "",
       this.deteccion= "",
       this.diagnostico= "",
-      this.observacion= "",
       this.investigador= 0,
       this.tipo_irregularidad= "",
       this.incidencia= "",
-      this.area_apoyo= "",
       this.estado= "",
       this.soporte= "",
       this.conclusiones="",
+      this.observacion="",
       this.duracion= 0
 
     }
 
-    static registrar_caso(value: number): boolean{
-        return value == 0? false : true;
-    }
+    static fromObject(color: Case): Case{
+      let obj = new Case();
+      obj.id = color.id;
+      obj.nro_expediente = color.nro_expediente;
+      obj.movil_afectado = color.movil_afectado;
+      obj.subtipo_irregularidad = color.subtipo_irregularidad;
+      obj.objetivo = color.objetivo;
+      obj.modus_operandi = color.modus_operandi;
+      obj.area_apoyo = color.area_apoyo;
+      obj.fecha_inicio = color.fecha_inicio;
+      obj.tipo_caso = color.tipo_caso;
+      obj.deteccion = color.deteccion;
+      obj.diagnostico = color.diagnostico;
+      obj.observacion = color.observacion;
+      obj.tipo_irregularidad = color.tipo_irregularidad;
+      obj.incidencia = color.incidencia;
+      obj.investigador = color.investigador;
+      obj.estado = color.estado;
+      obj.soporte = color.soporte;
+      obj.conclusiones = color.conclusiones;
+      obj.duracion = color.duracion;
+      return obj;
+  }
+
+    
   }
