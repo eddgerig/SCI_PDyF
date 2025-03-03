@@ -10,3 +10,5 @@ Ejecute npm run electron-build y se iniciará la aplicación.
 
 Ejecute npm run electron-builder para construir la aplicaciòn. El ejecutable se creara dentro de  `dist/`, tendra por nombre : `Sistema de Casos de Investigación Setup 0.0.0.exe`
 
+
+
