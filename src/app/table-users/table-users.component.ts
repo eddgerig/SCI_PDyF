@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsuarioBdService } from '../service/usuario-bd.service';
+import { IUser } from '../models/user.model';
 
 @Component({
   selector: 'app-table-users',
@@ -11,8 +12,8 @@ import { UsuarioBdService } from '../service/usuario-bd.service';
 })
 export class TableUsersComponent {
   @Input() searchTerm: string = ''; // Recibe el término de búsqueda
-  usuarios: any = []
-  usuarioSelected: any = null;
+  usuarios: IUser[] = []
+  usuarioSelected: IUser = new IUser;
   @Output() onSelected: EventEmitter<any> = new EventEmitter<any>();
 
   /*usuarios = [

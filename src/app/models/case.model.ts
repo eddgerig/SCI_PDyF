@@ -14,11 +14,14 @@ export class Case {
    diagnostico: string;
    observacion: string;
    investigador: number;
+   //investigador: number;
    tipo_irregularidad: string;
    incidencia: string;
    area_apoyo: string;
    estado: string;
    soporte: string;
+   nombre: string;
+   cedula: string;
  
   constructor( 
   ) {
@@ -41,6 +44,8 @@ export class Case {
       this.soporte= "",
       this.conclusiones="",
       this.observacion="",
+      this.nombre="",
+      this.cedula="",
       this.duracion= 0
 
     }
@@ -66,6 +71,8 @@ export class Case {
       obj.soporte = color.soporte;
       obj.conclusiones = color.conclusiones;
       obj.duracion = color.duracion;
+      obj.nombre = color.nombre;
+      obj.cedula = color.cedula;
       return obj;
   }
 

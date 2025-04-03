@@ -5,6 +5,7 @@ import { SearchComponent } from '../search/search.component';
 import { AddUserComponent } from '../add-user/add-user.component';
 import { NgIf } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { IUser } from '../models/user.model';
 
 @Component({
   selector: 'app-users-main',
@@ -15,7 +16,7 @@ import { RouterModule } from '@angular/router';
 })
 export class UsersMainComponent {
 
-  usuarioSelected: any = null;
+  usuarioSelected: IUser = new IUser;
   searchTerm: string = '';
 
   showAddUser = false; // Variable de estado para controlar la visibilidad
@@ -26,7 +27,7 @@ export class UsersMainComponent {
     ) {} 
   // Función para mostrar el formulario add-user
   showAddUserForm() {
-    this.usuarioSelected = null
+    this.usuarioSelected = new IUser;
     this.showAddUser = true;
     this.cdr.detectChanges();
     console.log("click");
@@ -45,7 +46,7 @@ export class UsersMainComponent {
   }
 
   // Función para agregar un nuevo usuario a la tabla
-  agregarUsuario(nuevoUsuario: any) {
+ /* agregarUsuario(nuevoUsuario: any) {
     
     alert(`Datos del nuevo usuario:\n
       Nombre: ${nuevoUsuario.nombre}\n
@@ -59,7 +60,7 @@ export class UsersMainComponent {
     console.log('Nuevo usuario:', nuevoUsuario);
     
   }
-
+*/
 
   onUserSelected($event: any){
     console.log('Usuario seleccionado:', $event);

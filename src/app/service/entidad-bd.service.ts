@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { IEntidad } from '../models/entidad.model';
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +49,7 @@ export class EntidadBdService {
   }
 
   // Método para consultar todas las entidades
-  public consultarEntidades(): Observable<any[]> {
+  public consultarEntidades(): Observable<IEntidad[]> {
     console.log("Consultando entidades...");
     (window as any).entidadesAPI.consultarEntidades();
 

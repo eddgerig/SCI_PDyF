@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Case } from '../models/case.model';
 import { Observable, Subject } from 'rxjs';
+import { IUser } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -68,7 +69,7 @@ export class CaseService {
     );
   }
   
-  public consultarCaso_Inv(callback: (rows: any[]) => void) {
+  public consultarCaso_Inv(callback: (rows: Case[]) => void) {
     (window as any).caso_inv.ipcRenderer.send('consultar-caso_inv');
 
     (window as any).caso_inv.ipcRenderer.on('caso_inv-consultados', (event: any, arg: { error: any; data: any[]; }) => {
@@ -111,7 +112,7 @@ export class CaseService {
   }
 
 
-  public buscarInv(): Observable<Array<any>> {
+  public buscarInv(): Observable<Array<IUser>> {
   
     console.log(`buscarInv`);
       (window as any).caso_inv.buscarInv("");
@@ -135,7 +136,7 @@ export class CaseService {
   }
 
 
-  public buscarCasoPorInv(user: number): Observable<Array<any>> {
+  public buscarCasoPorInv(user: number): Observable<Array<Case>> {
   
     console.log(`buscarCasoPorInv`);
       (window as any).caso_inv.buscarCasoPorInv(user);
@@ -173,7 +174,7 @@ export class CaseService {
       casoSelected, actividades_realizadas, personas_involucradas, monto_exp
     );
   }
-  public consultarCaso_Avanc(callback: (rows: any[]) => void) {
+  public consultarCaso_Avanc(callback: (rows: Case[]) => void) {
     (window as any).caso_inv.ipcRenderer.send('consultar-avances');
 
     (window as any).caso_inv.ipcRenderer.on('avances-consultados', (event: any, arg: { error: any; data: any[]; }) => {
@@ -185,7 +186,7 @@ export class CaseService {
         }
     });
   }
-  public buscarCaso_Avance(caso_id: number): Observable<Array<any>> {
+  public buscarCaso_Avance(caso_id: number): Observable<Array<Case>> {
   
     console.log(`buscarCaso_Avance`);
       (window as any).caso_inv.buscarCaso_Avance(caso_id);
@@ -229,7 +230,7 @@ export class CaseService {
       casoSelected, conclusion, recomend, observ
     );
   }
-  public consultarCaso_Cerrado(callback: (rows: any[]) => void) {
+  public consultarCaso_Cerrado(callback: (rows: Case[]) => void) {
     (window as any).caso_inv.ipcRenderer.send('consultar-cerrar_caso');
 
     (window as any).caso_inv.ipcRenderer.on('cerrar_caso-consultados', (event: any, arg: { error: any; data: any[]; }) => {
@@ -241,7 +242,7 @@ export class CaseService {
         }
     });
   }
-  public buscarCaso_Cerrado(caso_id: number): Observable<Array<any>> {
+  public buscarCaso_Cerrado(caso_id: number): Observable<Array<Case>> {
   
     console.log(`buscarCaso_Cerrado`);
       (window as any).caso_inv.buscarCaso_Cerrado(caso_id);

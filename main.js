@@ -18,7 +18,7 @@ app.on('ready', () => {
     });
 
     mainWindow.loadFile(path.join(__dirname, 'dist/sci/browser/index.html'));
-    mainWindow.setMenu(null);
+    //mainWindow.setMenu(null); // Esta linea es para deshabilitar el inspeccionar , osea , la consola y eso de la web
 
     // Inicializar base de datos
    const dbPath = path.join(__dirname, 'database.db');
@@ -352,7 +352,7 @@ ipcMain.on('consultar-caso_inv', (event) => {
     db.all(`SELECT 
                 ci.*,           -- Selecciona todos los campos de caso_investigador
                 u.nombre,       -- Selecciona el nombre del investigador (puede ser NULL)
-                u.cedula        -- Selecciona el email del investigador (puede ser NULL)
+                u.cedula       -- Selecciona el ci del investigador (puede ser NULL)
             FROM 
                 caso_investigador ci
             LEFT JOIN 

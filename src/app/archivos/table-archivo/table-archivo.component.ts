@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./table-archivo.component.css']
 })
 export class TableArchivoComponent {
-    @Output() onSelected: EventEmitter<any> = new EventEmitter<any>();
+    @Output() onSelected: EventEmitter<Archivo> = new EventEmitter<Archivo>();
 
   archivos: Archivo[] = [];
 
@@ -22,7 +22,7 @@ export class TableArchivoComponent {
   ngOnInit(): void {
     this.cargarArchivos();
   }
-  onRowSelect(event: any): void {
+  onRowSelect(event: Archivo): void {
     console.log("Archivo seleccionado", event)
     this.onSelected.next(event);
 

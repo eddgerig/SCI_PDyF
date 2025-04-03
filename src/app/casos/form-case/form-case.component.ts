@@ -7,6 +7,7 @@ import { NgIf } from '@angular/common';
 import { UsuarioBdService } from '../../service/usuario-bd.service';
 import { EntidadBdService } from '../../service/entidad-bd.service';
 import { IEntidad } from '../../models/entidad.model';
+import { IUser } from '../../models/user.model';
 
 
 
@@ -25,7 +26,7 @@ export class FormCaseComponent {
   @Input()activeTabId : number = -1;
   @Output() goBack = new EventEmitter<void>();
   caseForm!: FormGroup;
-  usuarios: any = []
+  usuarios: IUser[] = []
   entidades: IEntidad[] = [];  
 
   isDisabled: boolean = true; // Inicialmente, el select está habilitado
@@ -65,7 +66,7 @@ export class FormCaseComponent {
   getUser(){
 
     console.log("refresh")
-    this.caseService.buscarInv().subscribe((value:any[]) => {
+    this.caseService.buscarInv().subscribe((value:IUser[]) => {
       this.usuarios = value
       this.updateSelectDisabledState()
       console.log("array ", value)
@@ -160,14 +161,14 @@ export class FormCaseComponent {
      
     });
     this.cdr.detectChanges();
-    console.log("setForm",this.casoSelected)
+   // console.log("setForm",this.casoSelected)
   }
 
   onSubmit() {
     
     console.log("onSubmit",this.caseForm)
     if (this.caseForm.valid) {
-      console.log("********",this.caseForm)
+      //console.log("********",this.caseForm)
       if(this.caseForm.value['id'] != 0){
         if(this.activeTabId == 3){
 
@@ -232,7 +233,7 @@ export class FormCaseComponent {
 
   onCancel() {
     this.caseForm.reset();
-    this.caseService.clearCase();
+   // this.caseService.clearCase();
   }
 
   onRegistrarAvances() {

@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { TableArchivoComponent } from '../table-archivo/table-archivo.component';
 import { NgIf } from '@angular/common';
 import { AddArchivoComponent } from '../add-archivo/add-archivo.component';
+import { Archivo } from '../../models/archivosFactoryMethod.model';
 
 
 @Component({
@@ -16,7 +17,7 @@ import { AddArchivoComponent } from '../add-archivo/add-archivo.component';
 })
 export class ArchivoMainComponent {
   showAddArchivo = false;
-  archivoSelected: any = null;
+  archivoSelected: Archivo= {id_archivo: "", tipo:   "", descripcion:""} ;
   
 constructor( private cdr: ChangeDetectorRef ) { }
 
@@ -36,7 +37,7 @@ ngOnInit(){
     this.showAddArchivo = false;
     this.cdr.detectChanges();
   }
-  onArchivoSelected($event: any){
+  onArchivoSelected($event: Archivo){
     console.log('Archivo seleccionado desde archivo-main:', $event);
  
     this.showAddArchivo = true;

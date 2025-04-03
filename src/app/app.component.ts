@@ -96,7 +96,7 @@ export class AppComponent {
     //this.entidadBdService.cargarEntidades();
 
 
-    this.archivosService.insertarAmonestado(
+   /* this.archivosService.insertarAmonestado(
       'AMON-001',
       'Caso-2023-001',
       'Amonestado',
@@ -111,7 +111,7 @@ export class AppComponent {
     this.archivosService.consultarArchivos().subscribe(archivos => {
       console.log('Archivos en el sistema:', archivos);
     });
-
+*/
 
 
 

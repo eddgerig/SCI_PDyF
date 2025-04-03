@@ -6,6 +6,7 @@ import { Router, RouterModule } from '@angular/router';
 import { UsuarioBdService } from '../../service/usuario-bd.service';
 import { NgIf } from '@angular/common';
 import { AddCasoComponent } from "../add-caso/add-caso.component";
+import { Case } from '../../models/case.model';
 @Component({
   selector: 'app-casos-main',
   standalone: true,
@@ -15,7 +16,7 @@ import { AddCasoComponent } from "../add-caso/add-caso.component";
 })
 export class CasosMainComponent {
   rol: number | null = null; // Almacenaremos el rol del usuario 
-  casoSelected: any = null;
+  casoSelected: Case = new Case;
   showAddCase = false;
   constructor(private router: Router, private usuarioBdService: UsuarioBdService, private cdr: ChangeDetectorRef ) { }
 
@@ -24,12 +25,12 @@ export class CasosMainComponent {
     console.log("ROl DEL USUARIO CASOS MAIN:", this.rol);
   }
   showAddCaseForm() {
-    this.casoSelected = null
+    this.casoSelected = new Case
     this.showAddCase = true;
     this.cdr.detectChanges();
     console.log("click");
   }
-  onCaseSelected($event: any){
+  onCaseSelected($event: Case){
     console.log('Usuario seleccionado desde case-main:', $event);
     // Aquí puedes agregar la lógica para manejar el evento de selección del usuario
     this.showAddCase = true;

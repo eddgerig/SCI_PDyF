@@ -13,8 +13,8 @@ import { IEntidad } from '../../models/entidad.model';
 export class TableEntidadesComponent implements OnInit {
 
   entidades: IEntidad[] = [];
-  entidadSelected: any = null; // Entidad seleccionada
-  @Output() onSelected: EventEmitter<any> = new EventEmitter<any>(); // Evento para emitir la entidad seleccionada
+  entidadSelected: IEntidad = new IEntidad; // Entidad seleccionada
+  @Output() onSelected: EventEmitter<IEntidad> = new EventEmitter<IEntidad>(); // Evento para emitir la entidad seleccionada
   currentPage: number = 1;
   itemsPerPage: number = 7;
   totalPages: number = 1;
@@ -30,7 +30,7 @@ export class TableEntidadesComponent implements OnInit {
 
   // Método para cargar las entidades
   cargarEntidades() {
-    this.entidadBdService.consultarEntidades().subscribe((entidades: any[]) => {
+    this.entidadBdService.consultarEntidades().subscribe((entidades: IEntidad[]) => {
       this.entidades = entidades.map(entidad => IEntidad.fromObject(entidad));
       this.calcularTotalPaginas();
       this.cdr.detectChanges(); // Forzar la detección de cambios
@@ -66,7 +66,7 @@ export class TableEntidadesComponent implements OnInit {
   }
 
   // Método para emitir la entidad seleccionada
-  onRowSelect(event: any): void {
+  onRowSelect(event: IEntidad): void {
     console.log("Entidad seleccionada:", event);
     this.onSelected.emit(event); // Emitir la entidad seleccionada
   }

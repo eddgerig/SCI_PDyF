@@ -6,6 +6,7 @@ import { Router, RouterModule } from '@angular/router';
 import { EntidadBdService } from '../../service/entidad-bd.service';
 import { AddEntidadComponent } from "../add-entidad/add-entidad.component";
 import { CommonModule, NgIf } from '@angular/common';
+import { IEntidad } from '../../models/entidad.model';
 
 @Component({
   selector: 'app-entidades-main',
@@ -15,7 +16,7 @@ import { CommonModule, NgIf } from '@angular/common';
   styleUrl: './entidades-main.component.css'
 })
 export class EntidadesMainComponent {
-  entidadSelected: any = null;
+  entidadSelected: IEntidad = new IEntidad;
   showAddEntidad = false;
 
   constructor(private router: Router, private entidadBdService : EntidadBdService, private cdr: ChangeDetectorRef ) { }
@@ -27,7 +28,7 @@ export class EntidadesMainComponent {
     this.showAddEntidad = false;
     this.cdr.detectChanges();
   }
-  onEntidadSelected($event: any){
+  onEntidadSelected($event: IEntidad){
     console.log('Entidad seleccionada desde entidades-main:', $event);
     // Aquí puedes agregar la lógica para manejar el evento de selección del usuario
     this.showAddEntidad = true;
